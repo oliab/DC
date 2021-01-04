@@ -1,2 +1,1 @@
-# DC
-Sistema de Dinerocerca
+# ResaMxWeb
