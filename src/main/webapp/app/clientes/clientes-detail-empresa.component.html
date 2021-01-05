@@ -1,0 +1,74 @@
+<dl class="row jh-entity-details mt-3">
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.empresa.rfc">rfc</span></dt>
+        <dd>
+            <span>{{ datosEmpresaCliente.rfc }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.empresa.razonSocial">razonSocial</span></dt>
+        <dd>
+            <span>{{ datosEmpresaCliente.razonSocial }}</span>
+        </dd>
+    </div>  
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.empresa.tipoIdentificacion">tipoIdentificacion</span></dt>
+        <dd>
+            <span>{{ datosEmpresaCliente.tipoIdentificacion?.identificacion }}</span>
+        </dd>
+    </div> 
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.empresa.noIdentificacion">noIdentificacion</span></dt>
+        <dd>
+            <span>{{ datosEmpresaCliente.noIdentificacion }}</span>
+        </dd>
+    </div> 
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.empresa.telefono">telefono</span></dt>
+        <dd>
+            <span>{{ datosEmpresaCliente.telefono }}</span>
+        </dd>
+    </div>                              
+</dl>
+<dl class="row mt-5">
+    <div class="col-12">
+        <h5>Documentos</h5>
+        <hr>
+    </div>                                                    
+</dl>
+<div class="row">
+    <div class="col-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.comprobanteIdentificacion">comprobanteIdentificacion</span></dt>
+        <dd>
+            <div *ngIf="datosEmpresaCliente.comprobanteIdentificacion">
+                <a class="pull-left c-blue mr-3" (click)="openFile(datosEmpresaCliente.identificacionContentType, 
+                                        datosEmpresaCliente.comprobanteIdentificacion)" jhiTranslate="entity.action.open">open</a>
+                {{ datosEmpresaCliente.identificacionContentType }}, {{ byteSize(datosEmpresaCliente.comprobanteIdentificacion) }}
+            </div>
+        </dd>
+    </div>
+    <div class="col-8">
+        <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.descripcion">descripcion</span></dt>
+        <dd>
+            <span>{{ datosEmpresaCliente.descripcionIdentificacion }}</span>
+        </dd>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.comprobanteFirma">comprobanteFirma</span></dt>
+        <dd>
+            <div *ngIf="datosEmpresaCliente.comprobanteFirma">
+                <a class="pull-left c-blue mr-3" (click)="openFile(datosEmpresaCliente.firmaContentType, 
+                                            datosEmpresaCliente.comprobanteFirma)" jhiTranslate="entity.action.open">open</a>
+                {{ datosEmpresaCliente.firmaContentType }}, {{ byteSize(datosEmpresaCliente.comprobanteFirma) }}
+            </div>
+        </dd>
+    </div>
+    <div class="col-8">
+        <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.descripcion">descripcion</span></dt>
+        <dd>
+            <span>{{ datosEmpresaCliente.descripcionFirma }}</span>
+        </dd>
+    </div>
+</div> 

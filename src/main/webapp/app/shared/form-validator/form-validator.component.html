@@ -1,0 +1,7 @@
+<div class="form-group">
+    <ng-content></ng-content>
+    <small class="form-text text-danger"
+            *ngIf="errorControl !== null">
+        {{ errorControl }}
+    </small>
+</div>

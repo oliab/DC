@@ -1,0 +1,23 @@
+{
+  "resaMxWebApp": {
+    "catIdentificacion": {
+      "home": {
+        "title": "Cat Identificacions",
+        "createLabel": "Crear nuevo Cat Identificacion",
+        "createOrEditLabel": "Crear o editar Cat Identificacion",
+        "notFound": "Ningún Cat Identificacions encontrado"
+      },
+      "created": "Un nuevo Cat Identificacion ha sido creado con el identificador {{ param }}",
+      "updated": "Un Cat Identificacion ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Cat Identificacion ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Cat Identificacion {{ id }}?"
+      },
+      "detail": {
+        "title": "Cat Identificacion"
+      },
+      "identificacion": "Identificacion",
+      "usuario": "Usuario"
+    }
+  }
+}

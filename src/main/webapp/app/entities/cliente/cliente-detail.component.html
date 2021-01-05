@@ -1,0 +1,131 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">
+            <div *ngIf="cliente">
+                <h3 class="mb-4 pb-2"><span jhiTranslate="resaMxWebApp.cliente.detail.title">Cliente</span> {{ cliente.id }}</h3>
+                <div class="row">       
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <jhi-alert-error></jhi-alert-error>
+                                <dl class="row jh-entity-details">
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.noIdentificacion">No Identificacion</span></dt>
+                                        <dd>
+                                            <span>{{ cliente.noIdentificacion }}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.ingresos">Ingresos</span></dt>
+                                        <dd>
+                                            <span>{{ cliente.ingresos }}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.estimacionOperacion">Estimacion Operacion</span></dt>
+                                        <dd>
+                                            <span>{{ cliente.estimacionOperacion }}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.telefono">Telefono</span></dt>
+                                        <dd>
+                                            <span>{{ cliente.telefono }}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.fechaAlta">Fecha Alta</span></dt>
+                                        <dd>
+                                            <span>{{ cliente.fechaAlta }}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.fechaAct">Fecha Act</span></dt>
+                                        <dd>
+                                            <span>{{ cliente.fechaAct }}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.usuario">Usuario</span></dt>
+                                        <dd>
+                                            {{ cliente.usuario?.id }}
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.empresa">Empresa</span></dt>
+                                        <dd>
+                                            <div *ngIf="cliente.empresa">
+                                                <a [routerLink]="['/empresa', cliente.empresa?.id, 'view']">{{ cliente.empresa?.id }}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.tipoCliente">Tipo Cliente</span></dt>
+                                        <dd>
+                                            <div *ngIf="cliente.tipoCliente">
+                                                <a [routerLink]="['/cat-tipo-empresa', cliente.tipoCliente?.id, 'view']">{{ cliente.tipoCliente?.id }}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.tipoIdentificacion">Tipo Identificacion</span></dt>
+                                        <dd>
+                                            <div *ngIf="cliente.tipoIdentificacion">
+                                                <a [routerLink]="['/cat-identificacion', cliente.tipoIdentificacion?.id, 'view']">{{ cliente.tipoIdentificacion?.id }}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.sector">Sector</span></dt>
+                                        <dd>
+                                            <div *ngIf="cliente.sector">
+                                                <a [routerLink]="['/cat-sector', cliente.sector?.id, 'view']">{{ cliente.sector?.id }}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.moneda">Moneda</span></dt>
+                                        <dd>
+                                            <div *ngIf="cliente.moneda">
+                                                <a [routerLink]="['/cat-moneda', cliente.moneda?.id, 'view']">{{ cliente.moneda?.id }}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.cliente.usuarioAlta">Usuario Alta</span></dt>
+                                        <dd>
+                                            {{ cliente.usuarioAlta?.id }}
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        
+                                    <dt><span jhiTranslate="resaMxWebApp.cliente.usuarioAct">Usuario Act</span></dt>
+                                    <dd>
+                                        {{ cliente.usuarioAct?.id }}
+                                    </dd>
+                                    </div>
+                                </dl>
+                                <div class="row">
+                                    <div class="col-md-12 text-right">
+                                        <button type="submit"
+                                            (click)="previousState()"
+                                            class="btn btn-outline-primary px-4">
+                                            <i class="mdi mdi-arrow-left mr-2"></i><span jhiTranslate="entity.action.back">Back</span>
+                                        </button>
+                
+                                        <button type="button"
+                                            [routerLink]="['/cliente', cliente.id, 'edit']"
+                                            class="btn btn-primary px-4">
+                                            <i class="mdi mdi-pencil mr-2"></i><span jhiTranslate="entity.action.edit">Edit</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

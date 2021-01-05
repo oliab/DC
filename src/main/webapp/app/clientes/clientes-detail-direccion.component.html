@@ -1,0 +1,104 @@
+<dl class="row jh-entity-details mt-3">
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.nacionalidad">nacionalidad</span></dt>
+        <dd>
+            <span>{{ datosDireccionCliente.domicilioUsuario.nacionalidad?.nacionalidad }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.paisOrigen">paisOrigen</span></dt>
+        <dd>
+            <span>{{ datosDireccionCliente.domicilioUsuario.paisOrigen?.nombre }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.pais">pais</span></dt>
+        <dd>
+            <span>{{ datosDireccionCliente.domicilioUsuario.pais?.nombre }}</span>
+        </dd>
+    </div>
+    <div *ngIf="datosDireccionCliente.domicilioUsuario.nacionalidad?.id 
+                && datosDireccionCliente.domicilioUsuario.pais?.id
+                && datosDireccionCliente.domicilioUsuario.pais?.id !== PaisEnum.MEXICO" style="display: contents;">							
+        <div class="col-md-4">
+            <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.domicilio">domicilio</span></dt>
+            <dd>
+                <span>{{ datosDireccionCliente.domicilioUsuario.domicilio }}</span>
+            </dd>
+        </div>
+    </div> 
+    <div *ngIf="datosDireccionCliente.domicilioUsuario.nacionalidad?.id && datosDireccionCliente.domicilioUsuario.pais?.id === PaisEnum.MEXICO" style="display: contents;">
+        <div class="col-md-4">
+            <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.estado">estado</span></dt>
+            <dd>
+                <span>{{ datosDireccionCliente.domicilioUsuario.estado?.nombre }}</span>
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.municipio">municipio</span></dt>
+            <dd>
+                <span>{{ datosDireccionCliente.domicilioUsuario.municipio?.nombre }}</span>
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.localidad">localidad</span></dt>
+            <dd>
+                <span>{{ datosDireccionCliente.domicilioUsuario.localidad?.nombre }}</span>
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.cp">cp</span></dt>
+            <dd>
+                <span>{{ datosDireccionCliente.domicilioUsuario.cp?.id }}</span>
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.colonia">colonia</span></dt>
+            <dd>
+                <span>{{ datosDireccionCliente.domicilioUsuario.colonia }}</span>
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.calle">calle</span></dt>
+            <dd>
+                <span>{{ datosDireccionCliente.domicilioUsuario.calle }}</span>
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.noExt">noExt</span></dt>
+            <dd>
+                <span>{{ datosDireccionCliente.domicilioUsuario.noExt }}</span>
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.noInt">noInt</span></dt>
+            <dd>
+                <span>{{ datosDireccionCliente.domicilioUsuario.noInt }}</span>
+            </dd>
+        </div>
+    </div>    
+</dl>
+<dl class="row mt-5">
+    <div class="col-12">
+        <h5>Documentos</h5>
+        <hr>
+    </div>                                                    
+</dl>
+<div class="row">
+    <div class="col-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.comprobanteDomicilio">comprobanteDomicilio</span></dt>
+        <dd>
+            <div *ngIf="datosDireccionCliente.comprobanteDomicilio">
+                <a class="pull-left c-blue mr-3" (click)="openFile(datosDireccionCliente.domicilioContentType, 
+                datosDireccionCliente.comprobanteDomicilio)" jhiTranslate="entity.action.open">open</a>
+                {{ datosDireccionCliente.domicilioContentType }}, {{ byteSize(datosDireccionCliente.comprobanteDomicilio) }}
+            </div>
+        </dd>
+    </div>
+    <div class="col-8">
+        <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.descripcion">descripcion</span></dt>
+        <dd>
+            <span>{{ datosDireccionCliente.descripcionDomicilio }}</span>
+        </dd>
+    </div>
+</div>

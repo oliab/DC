@@ -1,0 +1,137 @@
+<div class="container-fluid">
+    <div class="row pt-5 mb-4">
+        <div class="col-6">
+            <h3 id="page-heading">
+                <span jhiTranslate="resaMxWebApp.catLocalidad.home.title">Cat Localidads</span>        
+            </h3>            
+        </div>
+        <div class="col-6 text-right">
+            <button id="jh-create-entity" class="btn btn-primary px-4 shadow-sm jh-create-entity create-cat-localidad" [routerLink]="['/cat-localidad/new']">
+                <i class="mdi mdi-plus mr-2"></i>
+                <span  jhiTranslate="resaMxWebApp.catLocalidad.home.createLabel">
+                Create a new Cat Localidad
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <jhi-alert-error></jhi-alert-error>
+    
+    <div class="row mb-2">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-sm" [(ngModel)]="filterId" placeholder="Buscar {{'resaMxWebApp.catLocalidad.id'|translate}}"/>
+                              </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                              <input type="text" class="form-control form-control-sm" [(ngModel)]="filterNombre" placeholder="Buscar {{'resaMxWebApp.catLocalidad.nombre'|translate}}"/>
+                            </div>
+                        </div> 
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <select class="form-control form-control-sm" [(ngModel)]="filterEstado" (change)="onEstado()">
+                                    <option [ngValue]="null">Seleccione un estado</option>
+                                    <option [ngValue]="catEstadoOption.id" *ngFor="let catEstadoOption of catEstados;">
+                                        {{catEstadoOption.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                       </div>
+                       <div class="col-lg-3">
+                            <div class="form-group">
+                                <select class="form-control form-control-sm" [(ngModel)]="filterMunicipio">
+                                    <option [ngValue]="null">Seleccione un municipio</option>
+                                    <option [ngValue]="catMunicipioOption.id" *ngFor="let catMunicipioOption of catMunicipios;">
+                                        {{catMunicipioOption.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ml-auto">
+                            <button class="btn btn-outline-primary btn-sm" (click)="onLimpiar()">Limpiar</button>
+                            <button class="btn btn-primary btn-sm" (click)="onBuscar()">Buscar</button>
+                       </div>                         
+                    </div>
+                    <jhi-alert></jhi-alert>
+                    <div class="alert alert-warning" id="no-result" *ngIf="catLocalidads?.length === 0">
+                        <span jhiTranslate="resaMxWebApp.catLocalidad.home.notFound">No catLocalidads found</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive  mb-5" id="entities" *ngIf="catLocalidads && catLocalidads.length > 0">
+                                <table class="table" aria-describedby="page-heading">
+                                    <thead>
+                                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                                            <th scope="col"  jhiSortBy="id"><span jhiTranslate="resaMxWebApp.catLocalidad.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="nombre"><span jhiTranslate="resaMxWebApp.catLocalidad.nombre">Nombre</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="clave"><span jhiTranslate="resaMxWebApp.catLocalidad.clave">Clave</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="usuario.id"><span jhiTranslate="resaMxWebApp.catLocalidad.usuario">Usuario</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="estado.id"><span jhiTranslate="resaMxWebApp.catLocalidad.estado">Estado</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="municipio.id"><span jhiTranslate="resaMxWebApp.catLocalidad.municipio">Municipio</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let catLocalidad of catLocalidads ;trackBy: trackId">
+                                            <td><a [routerLink]="['/cat-localidad', catLocalidad.id, 'view']">{{ catLocalidad.id }}</a></td>
+                                            <td>{{ catLocalidad.nombre }}</td>
+                                            <td>{{ catLocalidad.clave }}</td>
+                                            <td>
+                                                {{ catLocalidad.usuario?.firstName + ' ' + catLocalidad.usuario?.lastName }}
+                                            </td>
+                                            <td>
+                                                <div *ngIf="catLocalidad.estado">
+                                                    <a [routerLink]="['/cat-estado', catLocalidad.estado?.id, 'view']" >{{ catLocalidad.estado?.nombre }}</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div *ngIf="catLocalidad.municipio">
+                                                    <a [routerLink]="['/cat-municipio', catLocalidad.municipio?.id, 'view']" >{{ catLocalidad.municipio?.nombre }}</a>
+                                                </div>
+                                            </td>
+                                            <td class="text-right text-nowrap">
+                                                <button type="submit"
+                                                        [routerLink]="['/cat-localidad', catLocalidad.id, 'view']"
+                                                        class="btn btn-outline-primary btn-sm px-2">
+                                                        <i class="mdi mdi-eye"></i>
+                                                    <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.view">View</span>
+                                                </button>
+                    
+                                                <button type="submit"
+                                                        [routerLink]="['/cat-localidad', catLocalidad.id, 'edit']"
+                                                        class="btn btn-outline-primary btn-sm px-2">
+                                                        <i class="mdi mdi-pencil"></i>
+                                                    <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.edit">Edit</span>
+                                                </button>
+                    
+                                                <button type="submit" (click)="delete(catLocalidad)"
+                                                    class="btn btn-outline-primary btn-sm px-2">
+                                                    <i class="mdi mdi-trash-can"></i>
+                                                    <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.delete">Delete</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div *ngIf="catLocalidads && catLocalidads.length > 0" class="pt-5">
+                                <div class="row justify-content-center mb-3">
+                                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                                </div>
+                        
+                                <div class="row justify-content-center">
+                                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

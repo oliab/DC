@@ -1,0 +1,25 @@
+{
+  "resaMxWebApp": {
+    "catEstado": {
+      "home": {
+        "title": "Catálogo de Estados",
+        "createLabel": "Agregar Estado",
+        "createOrEditLabel": "Crear o editar Estado",
+        "notFound": "No se encontraron Estados"
+      },
+      "created": "Se ha agregado el Estado con el identificador {{ param }}",
+      "updated": "Se ha actualizado el Estado con el identificador {{ param }}",
+      "deleted": "Se ha eliminado el Estado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar el Estado {{ id }}?"
+      },
+      "detail": {
+        "title": "Estado"
+      },
+      "id": "Clave",
+      "nombre": "Nombre",
+      "usuario": "Usuario",
+      "pais": "Pais"
+    }
+  }
+}

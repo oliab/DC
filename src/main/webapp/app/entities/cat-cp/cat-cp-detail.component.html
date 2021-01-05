@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">
+            <div *ngIf="catCP">
+                <h3 class="mb-4 pb-2"><span jhiTranslate="resaMxWebApp.catCP.detail.title">Cat CP</span> {{ catCP.id }}</h3>
+    
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <dl class="row jh-entity-details">
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.catCP.anio">Anio</span></dt>
+                                        <dd>
+                                            <span>{{ catCP.anio }}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.catCP.usuario">Usuario</span></dt>
+                                        <dd>
+                                            {{ catCP.usuario?.firstName + ' ' + catCP.usuario?.lastName }}
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.catCP.estado">Estado</span></dt>
+                                        <dd>
+                                            <div *ngIf="catCP.estado">
+                                                <a [routerLink]="['/cat-estado', catCP.estado?.id, 'view']">{{ catCP.estado?.nombre }}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.catCP.municipio">Municipio</span></dt>
+                                        <dd>
+                                            <div *ngIf="catCP.municipio">
+                                                <a [routerLink]="['/cat-municipio', catCP.municipio?.id, 'view']">{{ catCP.municipio?.nombre }}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.catCP.riesgo">Riesgo</span></dt>
+                                        <dd>
+                                            <div *ngIf="catCP.riesgo">
+                                                <a [routerLink]="['/cat-riesgo', catCP.riesgo?.id, 'view']">{{ catCP.riesgo?.riesgo }}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                </dl>
+                                <jhi-alert-error></jhi-alert-error>
+                                <div class="row">
+                                    <div class="col-12 text-right">
+                                        <button type="submit"
+                                            (click)="previousState()"
+                                            class="btn btn-outline-primary px-4">
+                                            <i class="mdi mdi-arrow-left mr-2"></i><span jhiTranslate="entity.action.back">Back</span>
+                                        </button>
+                    
+                                        <button type="button"
+                                            [routerLink]="['/cat-cp', catCP.id, 'edit']"
+                                            class="btn btn-primary px-4">
+                                            <i class="mdi mdi-pencil mr-2"></i><span jhiTranslate="entity.action.edit">Edit</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>            
+        </div>
+    </div>    
+</div>

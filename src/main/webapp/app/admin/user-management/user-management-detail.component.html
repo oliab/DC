@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">
+        <div *ngIf="user">
+            <h3 class="mb-4 pb-2">
+                <span jhiTranslate="userManagement.detail.title">User</span> [<b>{{ user.login }}</b>]
+            </h3>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <dl class="row jh-entity-details">
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="userManagement.login">Login</span></dt>
+                                    <dd>
+                                        <span>{{ user.login }}</span>
+                                        <jhi-boolean
+                                            [value]="user.activated ? true : false"
+                                            [textTrue]="'userManagement.activated' | translate"
+                                            [textFalse]="'userManagement.deactivated' | translate">
+                                        </jhi-boolean>
+                                    </dd>                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="userManagement.firstName">First Name</span></dt>
+                                    <dd>{{ user.firstName }}</dd>                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="userManagement.lastName">Last Name</span></dt>
+                                    <dd>{{ user.lastName }}</dd>
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="userManagement.email">Email</span></dt>
+                                    <dd>{{ user.email }}</dd>
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="userManagement.langKey">Lang Key</span></dt>
+                                    <dd>{{ user.langKey }}</dd>
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="userManagement.createdBy">Created By</span></dt>
+                                    <dd>{{ user.createdBy }}</dd>                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="userManagement.createdDate">Created Date</span></dt>
+                                    <dd>{{ user.createdDate | date:'dd/MM/yy HH:mm' }}</dd>
+                                </div>
+                                <div class="col-md-4">
+                
+                                    <dt><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span></dt>
+                                    <dd>{{ user.lastModifiedBy }}</dd>
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="userManagement.lastModifiedDate">Last Modified Date</span></dt>
+                                    <dd>{{ user.lastModifiedDate | date:'dd/MM/yy HH:mm' }}</dd>
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="userManagement.profiles">Profiles</span></dt>
+                                    <dd>
+                                        <ul class="list-unstyled">
+                                            <li *ngFor="let authority of user.authorities">
+                                                <span class="badge badge-info">{{ authority }}</span>
+                                            </li>
+                                        </ul>
+                                    </dd>
+                                </div>
+                            </dl>
+                            <div class="row">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" routerLink="../../" class="btn btn-outline-primary px-4">
+                                        <i class="mdi mdi-arrow-left mr-2"></i><span jhiTranslate="entity.action.back">Back</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

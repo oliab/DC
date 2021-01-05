@@ -1,0 +1,102 @@
+<div class="container-fluid">
+    <div class="row pt-5 mb-4">
+        <div class="col-6">
+            <h3>
+                <span id="user-management-page-heading" jhiTranslate="userManagement.home.title">Users</span>
+            </h3>
+        </div>
+        <div class="col-6 text-right">
+            <button class="btn btn-primary px-4 shadow-sm jh-create-entity" [routerLink]="['./new']">
+                <i class="mdi mdi-plus mr-2"></i><span jhiTranslate="userManagement.home.createLabel">Create a new User</span>
+            </button>
+        </div>
+    </div>
+
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+
+    <div class="row mb-2">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive mb-5" *ngIf="users">
+                                <table class="table" aria-describedby="user-management-page-heading">
+                                    <thead>
+                                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
+                                            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="login"><span jhiTranslate="userManagement.login">Login</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="email"><span jhiTranslate="userManagement.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"  jhiSortBy="langKey"> <span jhiTranslate="userManagement.langKey">Lang Key</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"><span jhiTranslate="userManagement.profiles">Profiles</span></th>
+                                            <th scope="col" jhiSortBy="createdDate"><span jhiTranslate="userManagement.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col" jhiSortBy="lastModifiedBy"><span jhiTranslate="userManagement.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col" jhiSortBy="lastModifiedDate"><span jhiTranslate="userManagement.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="users">
+                                        <tr *ngFor="let user of users; trackBy: trackIdentity">
+                                            <td><a [routerLink]="['./', user.login, 'view']">{{ user.id }}</a></td>
+                                            <td>{{ user.login }}</td>
+                                            <td>{{ user.email }}</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated"
+                                                        jhiTranslate="userManagement.deactivated">Deactivated</button>
+                                                <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                                                        [disabled]="!currentAccount || currentAccount.login === user.login" jhiTranslate="userManagement.activated">Activated</button>
+                                            </td>
+                                            <td>{{ user.langKey }}</td>
+                                            <td>
+                                                <div *ngFor="let authority of user.authorities">
+                                                    <span class="badge badge-info">{{ authority }}</span>
+                                                </div>
+                                            </td>
+                                            <td>{{ user.createdDate | date:'dd/MM/yy HH:mm' }}</td>
+                                            <td>{{ user.lastModifiedBy }}</td>
+                                            <td>{{ user.lastModifiedDate | date:'dd/MM/yy HH:mm' }}</td>
+                                            <td class="text-right text-nowrap">
+                                                    <button type="submit"
+                                                            [routerLink]="['./', user.login, 'view']"
+                                                            class="btn btn-outline-primary btn-sm px-2">
+                                                            <i class="mdi mdi-eye"></i>
+                                                        <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.view">View</span>
+                                                    </button>
+                        
+                                                    <button type="submit"
+                                                            [routerLink]="['./', user.login, 'edit']"
+                                                            queryParamsHandling="merge"
+                                                            class="btn btn-outline-primary btn-sm px-2">
+                                                            <i class="mdi mdi-pencil"></i>
+                                                        <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.edit">Edit</span>
+                                                    </button>
+                        
+                                                    <button type="button" (click)="deleteUser(user)"
+                                                            class="btn btn-outline-primary btn-sm px-2" [disabled]="!currentAccount || currentAccount.login === user.login">
+                                                            <i class="mdi mdi-trash-can"></i>
+                                                        <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.delete">Delete</span>
+                                                    </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                            <div *ngIf="users" class="pt-5">
+                                <div class="row justify-content-center mb-3">
+                                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                                </div>
+                        
+                                <div class="row justify-content-center">
+                                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="transition()"></ngb-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

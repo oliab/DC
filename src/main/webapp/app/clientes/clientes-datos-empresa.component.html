@@ -1,0 +1,118 @@
+<form name="editForm" role="form" novalidate [formGroup]="editForm">
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <jhi-form-validator [customErrors]="{ pattern: 'entity.validation.patternRFC' | translate }">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.empresa.rfc">RFC</label>
+                    <input type="text" class="form-control" name="rfc"
+                        placeholder="{{ 'resaMxWebApp.empresa.rfc' | translate }}"
+                        formControlName="rfc" [(ngModel)]="datosEmpresaCliente.rfc">
+            </jhi-form-validator>
+        </div>
+        <div class="col-md-4">
+            <jhi-form-validator>
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.empresa.razonSocial">Razón social</label>
+                    <input type="text" class="form-control" name="razonSocial"
+                        placeholder="{{ 'resaMxWebApp.empresa.razonSocial' | translate }}"
+                        formControlName="razonSocial" [(ngModel)]="datosEmpresaCliente.razonSocial">
+            </jhi-form-validator>
+        </div>
+        <div class="col-md-4">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.empresa.tipoIdentificacion" for="field_tipoIdentificacion">Tipo Identificacion</label>
+                <ngx-select id="field_tipoIdentificacion" 
+                        name="tipoIdentificacion" formControlName="tipoIdentificacion"
+                        class="form-control"
+                        [items]="catidentificacions" [allowClear]="true" placeholder="Tipo de identificación" 
+                        optionValueField="id" optionTextField="identificacion"  [(ngModel)]="datosEmpresaCliente.tipoIdentificacionId"
+                        noResultsFound="{{'error.noResults' | translate }}">
+                </ngx-select>
+            </jhi-form-validator>
+        </div>        
+        <div class="col-md-4">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.empresa.noIdentificacion" for="field_noIdentificacion">No Identificacion</label>
+                <input type="text" class="form-control" name="noIdentificacion" id="field_noIdentificacion"
+                    formControlName="noIdentificacion" [(ngModel)]="datosEmpresaCliente.noIdentificacion"/>
+            </jhi-form-validator>
+        </div>         
+        <div class="col-md-4">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.empresa.telefono" for="field_telefono">Telefono</label>
+                <input type="text" class="form-control" name="telefono" id="field_telefono"
+                    formControlName="telefono"  [(ngModel)]="datosEmpresaCliente.telefono" />
+            </jhi-form-validator>
+        </div>        
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <h5>Documentos</h5>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.cliente.comprobanteIdentificacion" for="field_comprobanteIdentificacion">Documento</label>
+                <div>                    
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input"  [ngClass]="tipoCliente" id="file_comprobanteIdentificacion" (change)="setFileData($event, 'comprobanteIdentificacion', false)" jhiTranslate="entity.action.addblob">
+                        <label class="custom-file-label" for="file_comprobanteIdentificacion">Seleccionar Archivo</label>
+                    </div>
+                    <div *ngIf="editForm.get('comprobanteIdentificacion')!.value" class="form-text text-danger clearfix float-left">
+                        <a class="pull-left c-blue mr-3" (click)="openFile(editForm.get('comprobanteIdentificacionContentType')!.value, editForm.get('comprobanteIdentificacion')!.value)" jhiTranslate="entity.action.open">open</a>
+                        <span class="pull-left d-inline-block mb-2">{{ editForm.get('comprobanteIdentificacionContentType')!.value }}, {{ byteSize(editForm.get('comprobanteIdentificacion')!.value) }}</span>
+                        <button type="button" (click)="editForm.patchValue({comprobanteIdentificacion: null});editForm.patchValue({comprobanteIdentificacionContentType: null});"
+                                class="btn btn-outline-primary btn-sm pull-right">
+                                <i class="mdi mdi-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" class="form-control" name="comprobanteIdentificacion" id="field_comprobanteIdentificacion"
+                       formControlName="comprobanteIdentificacion"/>
+                <input type="hidden" class="form-control" name="comprobanteIdentificacionContentType" id="field_comprobanteIdentificacionContentType"
+                       formControlName="comprobanteIdentificacionContentType" />
+            </jhi-form-validator>
+        </div>
+        <div class="col-md-8">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.descripcion" for="field_descripcionIdentificacion">Descripcion</label>
+                <textarea class="form-control" name="descripcionIdentificacion" id="field_descripcionIdentificacion"
+                        [(ngModel)]="datosEmpresaCliente.descripcionIdentificacion" rows="3"
+                       formControlName="descripcionIdentificacion"></textarea>
+            </jhi-form-validator>        
+        </div>        
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.cliente.comprobanteFirmaElectronica" for="field_comprobanteFirma">Documento</label>
+                <div>                    
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="file_comprobanteFirma" (change)="setFileData($event, 'comprobanteFirma', false)" jhiTranslate="entity.action.addblob">
+                        <label class="custom-file-label" for="file_comprobanteFirma">Seleccionar Archivo</label>
+                    </div>
+                    <div *ngIf="editForm.get('comprobanteFirma')!.value" class="form-text text-danger clearfix float-left">
+                        <a class="pull-left c-blue mr-3" (click)="openFile(editForm.get('comprobanteFirmaContentType')!.value, editForm.get('comprobanteFirma')!.value)" jhiTranslate="entity.action.open">open</a>
+                        <span class="pull-left mb-2 d-inline-block">{{ editForm.get('comprobanteFirmaContentType')!.value }}, {{ byteSize(editForm.get('comprobanteFirma')!.value) }}</span>
+                        <button type="button" (click)="editForm.patchValue({comprobanteFirma: null});editForm.patchValue({comprobanteFirmaContentType: null});"
+                                class="btn btn-outline-primary btn-sm pull-right">
+                                <i class="mdi mdi-close"></i>
+                        </button>
+                    </div>     
+                </div>
+                <input type="hidden" class="form-control" name="comprobanteFirma" id="field_comprobanteFirma"
+                       formControlName="comprobanteFirma"/>
+                <input type="hidden" class="form-control" name="comprobanteFirmaContentType" id="field_comprobanteFirmaContentType"
+                       formControlName="comprobanteFirmaContentType" />
+            </jhi-form-validator>
+        </div>
+        <div class="col-md-8">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.descripcion" for="field_descripcionFirma">Descripcion</label>
+                <textarea class="form-control" name="descripcionFirma" id="field_descripcionFirma"
+                        [(ngModel)]="datosEmpresaCliente.descripcionFirma" rows="3"
+                       formControlName="descripcionFirma"></textarea>
+            </jhi-form-validator>        
+        </div>        
+    </div>
+</form>

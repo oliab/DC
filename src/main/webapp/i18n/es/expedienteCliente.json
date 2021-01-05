@@ -1,0 +1,30 @@
+{
+  "resaMxWebApp": {
+    "expedienteCliente": {
+      "home": {
+        "title": "Expediente Clientes",
+        "createLabel": "Crear nuevo Expediente Cliente",
+        "createOrEditLabel": "Crear o editar Expediente Cliente",
+        "notFound": "Ningún Expediente Clientes encontrado"
+      },
+      "created": "Un nuevo Expediente Cliente ha sido creado con el identificador {{ param }}",
+      "updated": "Un Expediente Cliente ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Expediente Cliente ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Expediente Cliente {{ id }}?"
+      },
+      "detail": {
+        "title": "Expediente Cliente"
+      },
+      "empresarial": "Empresarial",
+      "descripcion": "Descripcion",
+      "documento": "Documento",
+      "fechaAlta": "Fecha Alta",
+      "fechaAct": "Fecha Act",
+      "cliente": "Cliente",
+      "tipoDocumento": "Tipo Documento",
+      "usuarioAlta": "Usuario Alta",
+      "usuarioAct": "Usuario Act"
+    }
+  }
+}

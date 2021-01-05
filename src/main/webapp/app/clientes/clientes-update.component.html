@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">            
+                <h3 class="mb-4 pb-2" id="jhi-cliente-heading" jhiTranslate="resaMxWebApp.cliente.home.createOrEditLabel">Create or edit a Cliente</h3>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <jhi-alert-error></jhi-alert-error>
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="datosGenerales-tab" data-toggle="tab" href="#datosGenerales"
+                                                    role="tab" aria-controls="datosGenerales" aria-selected="true">
+                                                    {{ 'resaMxWebApp.cliente.datosGenerales' | translate }}
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#datosDireccion"
+                                                    role="tab" aria-controls="datosDireccion" aria-selected="false">
+                                                    {{ 'resaMxWebApp.cliente.datosDireccion' | translate }}
+                                                </a>
+                                            </li>
+                                            <li class="nav-item tipoEmpresa d-none">
+                                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#datosEmpresa" role="tab" 
+                                                    aria-controls="datosEmpresa" aria-selected="false">
+                                                    {{ 'resaMxWebApp.cliente.datosEmpresa' | translate }}
+                                                </a>
+                                            </li>
+                                            <li class="nav-item tipoEmpresa d-none">
+                                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#datosDireccionEmpresa" role="tab" 
+                                                    aria-controls="datosDireccionEmpresa" aria-selected="false">
+                                                    {{ 'resaMxWebApp.cliente.datosDireccionEmpresa' | translate }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content cont-height" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="datosGenerales" role="tabpanel" aria-labelledby="datosGenerales-tab">
+                                                <jhi-clientes-datos-generales #cDatosGenerales (onTipoEmpresa)="onTipoEmpresa($event)"></jhi-clientes-datos-generales>
+                                            </div>
+                                            <div class="tab-pane fade" id="datosDireccion" role="tabpanel" aria-labelledby="datosDireccion-tab">
+                                                <jhi-clientes-datos-direccion #cDatosDireccion [tipoCliente]="'direccionUsuario'"></jhi-clientes-datos-direccion>
+                                            </div>
+                                            <div class="tab-pane fade" id="datosEmpresa" role="tabpanel" aria-labelledby="datosEmpresa-tab">
+                                                <jhi-clientes-datos-empresa #cDatosEmpresa></jhi-clientes-datos-empresa>                                              
+                                            </div>
+                                            <div class="tab-pane fade" id="datosDireccionEmpresa" role="tabpanel" aria-labelledby="datosDireccionEmpresa-tab">
+                                                <jhi-clientes-datos-direccion #cDatosDireccionEmpresa [tipoCliente]="'direccionEmpresa'"></jhi-clientes-datos-direccion>
+                                            </div>
+                                        </div>
+                    
+                                        <!--
+                                        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                                            <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                                        </div>
+                                        -->                                          
+                                    </div>
+                                </div>  
+                                <div class="row mt-3">
+                                    <div class="col-12 text-right">
+                                        <button type="button" id="cancel-save" class="btn btn-outline-primary px-4" (click)="previousState()">
+                                            <i class="mdi mdi-cancel mr-2"></i><span jhiTranslate="entity.action.cancel">Cancel</span>
+                                        </button>
+                    
+                                        <!--[disabled]="editForm.invalid || isSaving"-->
+                                        <button type="button" id="save-entity" class="btn btn-primary px-4" (click)="save()" >
+                                            <i class="mdi mdi-plus mr-2"></i><span jhiTranslate="entity.action.save">Save</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

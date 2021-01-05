@@ -1,0 +1,27 @@
+{
+  "resaMxWebApp": {
+    "catCP": {
+      "home": {
+        "title": "Catálogo de Códigos Postales",
+        "createLabel": "Agregar Código Postal",
+        "createOrEditLabel": "Crear o editar Código Postal",
+        "notFound": "No se han encontrado Códigos Postales"
+      },
+      "created": "Se ha agregado el Código Postal con el identificador {{ param }}",
+      "updated": "Se ha actualizado el Código Postal con el identificador {{ param }}",
+      "deleted": "Se ha eliminado el Código Postal con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Cat CP {{ id }}?"
+      },
+      "detail": {
+        "title": "Código Postal"
+      },
+      "id": "Código Postal",
+      "anio": "Anio",
+      "usuario": "Usuario",
+      "estado": "Estado",
+      "municipio": "Municipio",
+      "riesgo": "Riesgo"
+    }
+  }
+}

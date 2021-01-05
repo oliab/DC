@@ -1,0 +1,26 @@
+{
+  "resaMxWebApp": {
+    "catSucursal": {
+      "home": {
+        "title": "Catálogo de Sucursales",
+        "createLabel": "Agregar sucursal",
+        "createOrEditLabel": "Crear o editar Sucursal",
+        "notFound": "No se han encontrado sucursales"
+      },
+      "created": "Se ha agregado la Sucursal con el identificador {{ param }}",
+      "updated": "Se ha actualizado la Sucursal con el identificador {{ param }}",
+      "deleted": "Se ha eliminado la Sucursalcon el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar la Sucursal {{ id }}?"
+      },
+      "detail": {
+        "title": "Sucursal"
+      },
+      "nombre": "Nombre",
+      "direccion": "Dirección",
+      "telefono": "Teléfono",
+      "fechaAct": "Fecha actualización",
+      "usuario": "Usuario"
+    }
+  }
+}

@@ -1,0 +1,145 @@
+<div class="container">
+    <div class="row pt-5 mb-4">
+        <div class="col-6">
+            <h3 id="page-heading">
+                <span jhiTranslate="resaMxWebApp.catCP.home.title">Cat CPS</span>
+            </h3>
+        </div>
+        <div class="col-6 text-right">
+            <button id="jh-create-entity" class="btn btn-primary px-4 shadow-sm jh-create-entity create-cat-cp" [routerLink]="['/cat-cp/new']">
+                <i class="mdi mdi-plus mr-2"></i>
+                <span  jhiTranslate="resaMxWebApp.catCP.home.createLabel">
+                Create a new Cat CP
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <div class="row mb-2">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-sm" [(ngModel)]="filterId" placeholder="Buscar {{'resaMxWebApp.catCP.id'|translate}}"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select class="form-control form-control-sm" [(ngModel)]="filterEstado" (change)="onEstado()">
+                                    <option [ngValue]="null">Seleccione un estado</option>
+                                    <option [ngValue]="catEstadoOption.id" *ngFor="let catEstadoOption of catEstados;">
+                                        {{catEstadoOption.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select class="form-control form-control-sm" [(ngModel)]="filterMunicipio">
+                                    <option [ngValue]="null">Seleccione un municipio</option>
+                                    <option [ngValue]="catMunicipioOption.id" *ngFor="let catMunicipioOption of catMunicipios;">
+                                        {{catMunicipioOption.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select class="form-control form-control-sm" [(ngModel)]="filterRiesgo">
+                                    <option [ngValue]="null">Seleccione un riesgo</option>
+                                    <option [ngValue]="catRiesgoOption.id" *ngFor="let catRiesgoOption of catRiesgos;">
+                                        {{catRiesgoOption.riesgo}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ml-auto">
+                            <button class="btn btn-outline-primary btn-sm" (click)="onLimpiar()">Limpiar</button>
+                            <button class="btn btn-primary btn-sm" (click)="onBuscar()">Buscar</button>
+                        </div>
+                        <div class="alert alert-warning" id="no-result" *ngIf="catCPS?.length === 0">
+                            <span jhiTranslate="resaMxWebApp.catCP.home.notFound">No catCPS found</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive mb-5" id="entities" *ngIf="catCPS && catCPS.length > 0">
+                                <table class="table" aria-describedby="page-heading">
+                                    <thead>
+                                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                                            <th scope="col"  jhiSortBy="id"><span jhiTranslate="resaMxWebApp.catCP.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="anio"><span jhiTranslate="resaMxWebApp.catCP.anio">Anio</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="usuario.id"><span jhiTranslate="resaMxWebApp.catCP.usuario">Usuario</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="estado.id"><span jhiTranslate="resaMxWebApp.catCP.estado">Estado</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="municipio.id"><span jhiTranslate="resaMxWebApp.catCP.municipio">Municipio</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="riesgo.id"><span jhiTranslate="resaMxWebApp.catCP.riesgo">Riesgo</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let catCP of catCPS ;trackBy: trackId">
+                                            <td><a [routerLink]="['/cat-cp', catCP.id, 'view']">{{ catCP.id }}</a></td>
+                                            <td>{{ catCP.anio }}</td>
+                                            <td>
+                                                {{ catCP.usuario?.firstName + ' ' +  catCP.usuario?.lastName }}
+                                            </td>
+                                            <td>
+                                                <div *ngIf="catCP.estado">
+                                                    <a [routerLink]="['/cat-estado', catCP.estado?.id, 'view']" >{{ catCP.estado?.nombre }}</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div *ngIf="catCP.municipio">
+                                                    <a [routerLink]="['/cat-municipio', catCP.municipio?.id, 'view']" >{{ catCP.municipio?.nombre }}</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div *ngIf="catCP.riesgo">
+                                                    <a [routerLink]="['/cat-riesgo', catCP.riesgo?.id, 'view']" >{{ catCP.riesgo?.riesgo }}</a>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                    <button type="submit"
+                                                            [routerLink]="['/cat-cp', catCP.id, 'view']"
+                                                            class="btn btn-outline-primary btn-sm px-2">
+                                                            <i class="mdi mdi-eye mr-2"></i>
+                                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                                    </button>
+                        
+                                                    <button type="submit"
+                                                            [routerLink]="['/cat-cp', catCP.id, 'edit']"
+                                                            class="btn btn-outline-primary btn-sm px-2">
+                                                            <i class="mdi mdi-pencil mr-2"></i>
+                                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                                    </button>
+                        
+                                                    <button type="submit" (click)="delete(catCP)"
+                                                    class="btn btn-outline-primary btn-sm px-2">
+                                                    <i class="mdi mdi-trash-can mr-2"></i>
+                                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                                    </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div *ngIf="catCPS && catCPS.length > 0" class="pt-5">
+                                <div class="row justify-content-center mb-3">
+                                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                                </div>
+                        
+                                <div class="row justify-content-center">
+                                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>
+</div>

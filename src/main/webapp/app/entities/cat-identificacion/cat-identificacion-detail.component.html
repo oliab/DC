@@ -1,0 +1,34 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="catIdentificacion">
+            <h2><span jhiTranslate="resaMxWebApp.catIdentificacion.detail.title">Cat Identificacion</span> {{ catIdentificacion.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resaMxWebApp.catIdentificacion.identificacion">Identificacion</span></dt>
+                <dd>
+                    <span>{{ catIdentificacion.identificacion }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.catIdentificacion.usuario">Usuario</span></dt>
+                <dd>
+                    {{ catIdentificacion.usuario?.id }}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cat-identificacion', catIdentificacion.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

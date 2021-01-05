@@ -1,0 +1,151 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-expediente-cliente-heading" jhiTranslate="resaMxWebApp.expedienteCliente.home.createOrEditLabel">Create or edit a Expediente Cliente</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.empresarial" for="field_empresarial">Empresarial</label>
+                    <input type="checkbox" class="form-control" name="empresarial" id="field_empresarial"
+                           formControlName="empresarial"/>
+                    <div *ngIf="editForm.get('empresarial')!.invalid && (editForm.get('empresarial')!.dirty || editForm.get('empresarial')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('empresarial')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.descripcion" for="field_descripcion">Descripcion</label>
+                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                           formControlName="descripcion"/>
+                    <div *ngIf="editForm.get('descripcion')!.invalid && (editForm.get('descripcion')!.dirty || editForm.get('descripcion')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('descripcion')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 250 }">
+                        This field cannot be longer than 250 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.documento" for="field_documento">Documento</label>
+                    <div>
+                        <div *ngIf="editForm.get('documento')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('documentoContentType')!.value, editForm.get('documento')!.value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{ editForm.get('documentoContentType')!.value }}, {{ byteSize(editForm.get('documento')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({documento: null});editForm.patchValue({documentoContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_documento" (change)="setFileData($event, 'documento', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="documento" id="field_documento"
+                           formControlName="documento"/>
+                    <input type="hidden" class="form-control" name="documentoContentType" id="field_documentoContentType"
+                           formControlName="documentoContentType" />
+                    <div *ngIf="editForm.get('documento')!.invalid && (editForm.get('documento')!.dirty || editForm.get('documento')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('documento')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.fechaAlta" for="field_fechaAlta">Fecha Alta</label>
+                    <div class="input-group">
+                        <input id="field_fechaAlta" type="text" class="form-control" name="fechaAlta" ngbDatepicker #fechaAltaDp="ngbDatepicker" formControlName="fechaAlta"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="fechaAltaDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.fechaAct" for="field_fechaAct">Fecha Act</label>
+                    <div class="input-group">
+                        <input id="field_fechaAct" type="text" class="form-control" name="fechaAct" ngbDatepicker #fechaActDp="ngbDatepicker" formControlName="fechaAct"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="fechaActDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.cliente" for="field_cliente">Cliente</label>
+                    <select class="form-control" id="field_cliente" name="cliente" formControlName="cliente">
+                        <option *ngIf="!editForm.get('cliente')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="clienteOption.id === editForm.get('cliente')!.value?.id ? editForm.get('cliente')!.value : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackById">{{ clienteOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('cliente')!.invalid && (editForm.get('cliente')!.dirty || editForm.get('cliente')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('cliente')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.tipoDocumento" for="field_tipoDocumento">Tipo Documento</label>
+                    <select class="form-control" id="field_tipoDocumento" name="tipoDocumento" formControlName="tipoDocumento">
+                        <option *ngIf="!editForm.get('tipoDocumento')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="catTipoDocumentoOption.id === editForm.get('tipoDocumento')!.value?.id ? editForm.get('tipoDocumento')!.value : catTipoDocumentoOption" *ngFor="let catTipoDocumentoOption of cattipodocumentos; trackBy: trackById">{{ catTipoDocumentoOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('tipoDocumento')!.invalid && (editForm.get('tipoDocumento')!.dirty || editForm.get('tipoDocumento')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('tipoDocumento')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.usuarioAlta" for="field_usuarioAlta">Usuario Alta</label>
+                    <select class="form-control" id="field_usuarioAlta" name="usuarioAlta" formControlName="usuarioAlta">
+                        <option *ngIf="!editForm.get('usuarioAlta')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id === editForm.get('usuarioAlta')!.value?.id ? editForm.get('usuarioAlta')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('usuarioAlta')!.invalid && (editForm.get('usuarioAlta')!.dirty || editForm.get('usuarioAlta')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('usuarioAlta')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.usuarioAct" for="field_usuarioAct">Usuario Act</label>
+                    <select class="form-control" id="field_usuarioAct" name="usuarioAct" formControlName="usuarioAct">
+                        <option *ngIf="!editForm.get('usuarioAct')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id === editForm.get('usuarioAct')!.value?.id ? editForm.get('usuarioAct')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('usuarioAct')!.invalid && (editForm.get('usuarioAct')!.dirty || editForm.get('usuarioAct')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('usuarioAct')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

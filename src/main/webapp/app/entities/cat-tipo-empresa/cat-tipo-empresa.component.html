@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row pt-5 mb-4">
+        <div class="col-6">
+            <h3 id="page-heading">
+                <span jhiTranslate="resaMxWebApp.catTipoEmpresa.home.title">Cat Tipo Empresas</span>
+            </h3>
+        </div>
+        <div class="col-6 text-right">
+            <button id="jh-create-entity" class="btn btn-primary px-4 shadow-sm jh-create-entity create-cat-tipo-empresa" [routerLink]="['/cat-tipo-empresa/new']">
+                <i class="mdi mdi-plus mr-2"></i>
+                <span  jhiTranslate="resaMxWebApp.catTipoEmpresa.home.createLabel">
+                Create a new Cat Tipo Empresa
+                </span>
+            </button>
+        </div>
+    </div>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-warning" id="no-result" *ngIf="catTipoEmpresas?.length === 0">
+                                <span jhiTranslate="resaMxWebApp.catTipoEmpresa.home.notFound">No catTipoEmpresas found</span>
+                            </div>                        
+                            <div class="table-responsive mb-5" id="entities" *ngIf="catTipoEmpresas && catTipoEmpresas.length > 0">
+                                <table class="table" aria-describedby="page-heading">
+                                    <thead>
+                                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                                            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="resaMxWebApp.catTipoEmpresa.tipo">Tipo</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="usuario.id"><span jhiTranslate="resaMxWebApp.catTipoEmpresa.usuario">Usuario</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let catTipoEmpresa of catTipoEmpresas ;trackBy: trackId">
+                                            <td><a [routerLink]="['/cat-tipo-empresa', catTipoEmpresa.id, 'view']">{{ catTipoEmpresa.id }}</a></td>
+                                            <td>{{ catTipoEmpresa.tipo }}</td>
+                                            <td>
+                                                {{ catTipoEmpresa.usuario?.id }}
+                                            </td>
+                                            <td class="text-right">
+                                                <button type="submit"
+                                                        [routerLink]="['/cat-tipo-empresa', catTipoEmpresa.id, 'view']"
+                                                        class="btn btn-outline-primary btn-sm px-2">
+                                                        <i class="mdi mdi-eye"></i>
+                                                    <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.view">View</span>
+                                                </button>
+                    
+                                                <button type="submit"
+                                                        [routerLink]="['/cat-tipo-empresa', catTipoEmpresa.id, 'edit']"
+                                                        class="btn btn-outline-primary btn-sm px-2">
+                                                        <i class="mdi mdi-pencil"></i>
+                                                    <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.edit">Edit</span>
+                                                </button>
+                    
+                                                <button type="submit" (click)="delete(catTipoEmpresa)"
+                                                class="btn btn-outline-primary btn-sm px-2">
+                                                <i class="mdi mdi-trash-can"></i>
+                                                    <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.delete">Delete</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                            <div *ngIf="catTipoEmpresas && catTipoEmpresas.length > 0" class="pt-5">
+                                <div class="row justify-content-center mb-3">
+                                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                                </div>
+                        
+                                <div class="row justify-content-center">
+                                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

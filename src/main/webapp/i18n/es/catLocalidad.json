@@ -1,0 +1,27 @@
+{
+  "resaMxWebApp": {
+    "catLocalidad": {
+      "home": {
+        "title": "Catálogo de Localidades",
+        "createLabel": "Agregar Localidad",
+        "createOrEditLabel": "Crear o editar Localidad",
+        "notFound": "No se han encontrado Localidades"
+      },
+      "created": "Se ha agregado la Localidad con el identificador {{ param }}",
+      "updated": "Se ha actualizado la Localidad con el identificador {{ param }}",
+      "deleted": "Se ha eliminado la Localidad con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar la Localidad {{ id }}?"
+      },
+      "detail": {
+        "title": "Localidad"
+      },
+      "id": "Localidad",
+      "nombre": "Nombre",
+      "clave": "Clave",
+      "usuario": "Usuario",
+      "estado": "Estado",
+      "municipio": "Municipio"
+    }
+  }
+}

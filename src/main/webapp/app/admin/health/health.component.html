@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row pt-5 mb-4">
+        <div class="col-6">
+            <h3>
+                <span id="health-page-heading" jhiTranslate="health.title">Health Checks</span>
+            </h3>
+        </div>
+        <div class="col-6 text-right">
+            <button class="btn btn-primary px-4 shadow-sm" (click)="refresh()">
+                <i class="mdi mdi-sync mr-2"></i><span jhiTranslate="health.refresh.button">Refresh</span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table id="healthCheck" class="table" aria-describedby="health-page-heading">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" jhiTranslate="health.table.service">Service Name</th>
+                                            <th scope="col" class="text-center" jhiTranslate="health.table.status">Status</th>
+                                            <th scope="col" class="text-center" jhiTranslate="health.details.details">Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="health">
+                                        <tr *ngFor="let componentHealth of health.components | keys">
+                                            <td>
+                                                {{ 'health.indicator.' + componentHealth.key | translate }}
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge" [ngClass]="getBadgeClass(componentHealth.value.status)" jhiTranslate="{{ 'health.status.' + componentHealth.value.status }}">
+                                                    {{ componentHealth.value.status }}
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <a class="hand" (click)="showHealth(componentHealth)" *ngIf="componentHealth.value.details">
+                                                    <i class="mdi mdi-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

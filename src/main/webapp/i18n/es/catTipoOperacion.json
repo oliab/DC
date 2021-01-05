@@ -1,0 +1,24 @@
+{
+  "resaMxWebApp": {
+    "catTipoOperacion": {
+      "home": {
+        "title": "Catálogo de Tipo de Operaciones",
+        "createLabel": "Agregar Operación",
+        "createOrEditLabel": "Crear o editar Tipo de Operación",
+        "notFound": "No se han encontrado Tipo de Operaciones"
+      },
+      "created": "Se ha agregado un Tipo de Operación con el identificador {{ param }}",
+      "updated": "Se ha actualizado un Tipo de Operación con el identificador {{ param }}",
+      "deleted": "Se ha eliminado un Tipo de Operación con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar el Tipo de Operación {{ id }}?"
+      },
+      "detail": {
+        "title": "Tipo de Operación"
+      },
+      "operacion": "Operación",
+      "descripcion": "Descripción",
+      "usuario": "Usuario"
+    }
+  }
+}

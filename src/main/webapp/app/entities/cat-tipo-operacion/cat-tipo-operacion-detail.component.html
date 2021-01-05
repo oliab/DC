@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">
+            <div *ngIf="catTipoOperacion">
+                <h3 class="mb-4 pb-2"><span jhiTranslate="resaMxWebApp.catTipoOperacion.detail.title">Cat Tipo Operacion</span> {{ catTipoOperacion.id }}</h3>
+    
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <dl class="row jh-entity-details">
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.catTipoOperacion.operacion">Operacion</span></dt>
+                                        <dd>
+                                            <span>{{ catTipoOperacion.operacion }}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.catTipoOperacion.descripcion">Descripcion</span></dt>
+                                        <dd>
+                                            <span>{{ catTipoOperacion.descripcion }}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <dt><span jhiTranslate="resaMxWebApp.catTipoOperacion.usuario">Usuario</span></dt>
+                                        <dd>
+                                            {{ catTipoOperacion.usuario?.firstName + ' ' +  catTipoOperacion.usuario?.lastName }}
+                                        </dd>
+                                    </div>
+                                </dl>
+                                <jhi-alert-error></jhi-alert-error>
+                                <div class="row">
+                                    <div class="col-12 text-right">
+                                        <button type="submit"
+                                        (click)="previousState()"
+                                        class="btn btn-outline-primary px-4">
+                                        <i class="mdi mdi-arrow-left mr-2"></i><span jhiTranslate="entity.action.back">Back</span>
+                                </button>
+                    
+                                <button type="button"
+                                        [routerLink]="['/cat-tipo-operacion', catTipoOperacion.id, 'edit']"
+                                        class="btn btn-primary px-4">
+                                        <i class="mdi mdi-pencil mr-2"></i><span jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

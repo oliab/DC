@@ -1,0 +1,26 @@
+{
+  "resaMxWebApp": {
+    "catMunicipio": {
+      "home": {
+        "title": "Catálogo de Municipios",
+        "createLabel": "Agregar Municipio",
+        "createOrEditLabel": "Crear o editar Municipio",
+        "notFound": "No se han encontrado municipios"
+      },
+      "created": "Se ha agregado el Municipio con el identificador {{ param }}",
+      "updated": "Se ha actualizado el Municipio con el identificador {{ param }}",
+      "deleted": "Se ha eliminado el Municipio con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar el Municipio {{ id }}?"
+      },
+      "detail": {
+        "title": "Municipio"
+      },
+      "id": "Clave",
+      "nombre": "Nombre",
+      "clave": "Clave municipal",
+      "usuario": "Usuario",
+      "estado": "Estado"
+    }
+  }
+}

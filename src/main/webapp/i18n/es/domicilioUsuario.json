@@ -1,0 +1,35 @@
+{
+  "resaMxWebApp": {
+    "domicilioUsuario": {
+      "home": {
+        "title": "Domicilio Usuarios",
+        "createLabel": "Crear nuevo Domicilio Usuario",
+        "createOrEditLabel": "Crear o editar Domicilio Usuario",
+        "notFound": "Ningún Domicilio Usuarios encontrado"
+      },
+      "created": "Un nuevo Domicilio Usuario ha sido creado con el identificador {{ param }}",
+      "updated": "Un Domicilio Usuario ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Domicilio Usuario ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Domicilio Usuario {{ id }}?"
+      },
+      "detail": {
+        "title": "Domicilio Usuario"
+      },
+      "colonia": "Colonia",
+      "calle": "Calle",
+      "noExt": "No Ext",
+      "noInt": "No Int",
+      "domicilio": "Domicilio",
+      "fechaAct": "Fecha Act",
+      "nacionalidad": "Nacionalidad",
+      "paisOrigen": "Pais Origen",
+      "pais": "Pais",
+      "estado": "Estado",
+      "municipio": "Municipio",
+      "localidad": "Localidad",
+      "cp": "Cp",
+      "user": "User"
+    }
+  }
+}

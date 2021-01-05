@@ -1,0 +1,134 @@
+<dl class="row jh-entity-details mt-3">
+    <div class="col-md-4">
+        <dt><span jhiTranslate="userManagement.login">Login</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.usuario.login }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="userManagement.firstName">firstName</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.usuario.firstName }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="userManagement.lastName">lastName</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.usuario.lastName }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="userManagement.mLastName">mLastName</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.usuario.mLastName }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="userManagement.fechaNacimiento">fechaNacimiento</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.usuario.fechaNacimiento }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="userManagement.fechaNacimiento">fechaNacimiento</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.usuario.fechaNacimiento }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="userManagement.email">email</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.usuario.email }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.tipoIdentificacion">tipoIdentificacion</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.tipoIdentificacion?.identificacion }}</span>
+        </dd>
+    </div>                                                    
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.noIdentificacion">No Identificacion</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.noIdentificacion }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.moneda">moneda</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.moneda?.moneda }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.ingresos">ingresos</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.ingresos | number}}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.estimacionOperacion">estimacionOperacion</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.estimacionOperacion | number}}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.telefono">telefono</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.telefono }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.tipoCliente">tipoCliente</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.tipoCliente?.tipo }}</span>
+        </dd>
+    </div>
+    <div class="col-md-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.sector">sector</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.sector?.actividadEconomica }}</span>
+        </dd>
+    </div>                                       
+</dl>
+<dl class="row mt-5">
+    <div class="col-12">
+        <h5>Documentos</h5>
+        <hr>
+    </div>                                                    
+</dl>
+<div class="row">
+    <div class="col-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.comprobanteIdentificacion">comprobanteIdentificacion</span></dt>
+        <dd>
+            <div *ngIf="datosGeneralesCliente.comprobanteIdentificacion">
+                <a class="pull-left c-blue mr-3" (click)="openFile(datosGeneralesCliente.identificacionContentType, 
+                                    datosGeneralesCliente.comprobanteIdentificacion)" jhiTranslate="entity.action.open">open</a>
+                {{ datosGeneralesCliente.identificacionContentType }}, {{ byteSize(datosGeneralesCliente.comprobanteIdentificacion) }}
+            </div>
+        </dd>
+    </div>
+    <div class="col-8">
+        <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.descripcion">descripcion</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.descripcionIdentificacion }}</span>
+        </dd>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-4">
+        <dt><span jhiTranslate="resaMxWebApp.cliente.comprobanteIngresos">comprobanteIngresos</span></dt>
+        <dd>
+            <div *ngIf="datosGeneralesCliente.comprobanteIngresos">
+                <a class="pull-left c-blue mr-3" (click)="openFile(datosGeneralesCliente.ingresosContentType, 
+                                    datosGeneralesCliente.comprobanteIngresos)" jhiTranslate="entity.action.open">open</a>
+                {{ datosGeneralesCliente.ingresosContentType }}, {{ byteSize(datosGeneralesCliente.comprobanteIngresos) }}
+            </div>
+        </dd>
+    </div>
+    <div class="col-8">
+        <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.descripcion">descripcion</span></dt>
+        <dd>
+            <span>{{ datosGeneralesCliente.descripcionIngresos }}</span>
+        </dd>
+    </div>
+</div> 

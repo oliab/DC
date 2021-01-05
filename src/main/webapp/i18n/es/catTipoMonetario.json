@@ -1,0 +1,25 @@
+{
+  "resaMxWebApp": {
+    "catTipoMonetario": {
+      "home": {
+        "title": "Catálogo de Tipos Monetarios",
+        "createLabel": "Agregar Tipo Monetario",
+        "createOrEditLabel": "Crear o editar Tipo Monetario",
+        "notFound": "No se han encontrado Tipos Monetarios"
+      },
+      "created": "Se ha agregado el Tipo Monetario con el identificador {{ param }}",
+      "updated": "Se ha actualizado el Tipo Monetario con el identificador {{ param }}",
+      "deleted": "Se ha eliminado el Tipo Monetario con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar el Tipo Monetario {{ id }}?"
+      },
+      "detail": {
+        "title": "Tipo Monetario"
+      },
+      "id": "Clave",
+      "instrumento": "Instrumento",
+      "descripcion": "Descripción",
+      "usuario": "Usuario"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h3 id="jhi-cat-sucursal-heading" jhiTranslate="resaMxWebApp.catSucursal.home.createOrEditLabel" class="mb-4 pb-2">Create or edit a Cat Sucursal</h3>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <jhi-alert-error></jhi-alert-error>
+                                <div class="col-md-4">
+                                    <jhi-form-validator>
+                                        <div class="form-group">
+                                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                                            <input type="text" class="form-control" id="id" name="id" formControlName="id" />
+                                        </div>
+                                    </jhi-form-validator>
+                                </div>
+                                <div class="col-md-4">
+                                    <jhi-form-validator>
+                                        <div class="form-group">
+                                            <label class="form-control-label" jhiTranslate="resaMxWebApp.catSucursal.nombre" for="field_nombre">Nombre</label>
+                                            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                                                formControlName="nombre"/>              
+                                        </div>    
+                                    </jhi-form-validator>
+                                </div>
+                                <div class="col-md-4">
+                                    <jhi-form-validator>
+                                        <label class="form-control-label" jhiTranslate="resaMxWebApp.catSucursal.direccion" for="field_direccion">Direccion</label>
+                                        <input type="text" class="form-control" name="direccion" id="field_direccion"
+                                               formControlName="direccion"/>
+                                    </jhi-form-validator>
+                                </div>
+                                <div class="col-md-4">
+                                    <jhi-form-validator>
+                                        <label class="form-control-label" jhiTranslate="resaMxWebApp.catSucursal.telefono" for="field_telefono">Telefono</label>
+                                        <input type="text" class="form-control" name="telefono" id="field_telefono"
+                                               formControlName="telefono"/>                  
+                                    </jhi-form-validator>                                       
+                                </div>                                
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-right">
+                                    <button type="button" id="cancel-save" class="btn btn-outline-primary px-4" (click)="previousState()">
+                                        <i class="mdi mdi-cancel mr-2"></i><span jhiTranslate="entity.action.cancel">Cancel</span>
+                                    </button>
+                    
+                                    <button type="submit" id="save-entity"  class="btn btn-primary px-4" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                                        <i class="mdi mdi-plus mr-2"></i><span jhiTranslate="entity.action.save">Save</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                   
+            </div>
+        </form>
+    </div>
+</div>

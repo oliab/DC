@@ -1,0 +1,102 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="resaMxWebApp.expedienteCliente.home.title">Expediente Clientes</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-expediente-cliente" [routerLink]="['/expediente-cliente/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="resaMxWebApp.expedienteCliente.home.createLabel">
+            Create a new Expediente Cliente
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="expedienteClientes?.length === 0">
+        <span jhiTranslate="resaMxWebApp.expedienteCliente.home.notFound">No expedienteClientes found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="expedienteClientes && expedienteClientes.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="empresarial"><span jhiTranslate="resaMxWebApp.expedienteCliente.empresarial">Empresarial</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="descripcion"><span jhiTranslate="resaMxWebApp.expedienteCliente.descripcion">Descripcion</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="documento"><span jhiTranslate="resaMxWebApp.expedienteCliente.documento">Documento</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fechaAlta"><span jhiTranslate="resaMxWebApp.expedienteCliente.fechaAlta">Fecha Alta</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fechaAct"><span jhiTranslate="resaMxWebApp.expedienteCliente.fechaAct">Fecha Act</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="cliente.id"><span jhiTranslate="resaMxWebApp.expedienteCliente.cliente">Cliente</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="tipoDocumento.id"><span jhiTranslate="resaMxWebApp.expedienteCliente.tipoDocumento">Tipo Documento</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="usuarioAlta.id"><span jhiTranslate="resaMxWebApp.expedienteCliente.usuarioAlta">Usuario Alta</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="usuarioAct.id"><span jhiTranslate="resaMxWebApp.expedienteCliente.usuarioAct">Usuario Act</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let expedienteCliente of expedienteClientes ;trackBy: trackId">
+                    <td><a [routerLink]="['/expediente-cliente', expedienteCliente.id, 'view']">{{ expedienteCliente.id }}</a></td>
+                    <td>{{ expedienteCliente.empresarial }}</td>
+                    <td>{{ expedienteCliente.descripcion }}</td>
+                    <td>
+                        <a *ngIf="expedienteCliente.documento" (click)="openFile(expedienteCliente.documentoContentType, expedienteCliente.documento)" jhiTranslate="entity.action.open">open</a>
+                        <span *ngIf="expedienteCliente.documento">{{ expedienteCliente.documentoContentType }}, {{ byteSize(expedienteCliente.documento) }}</span>
+                    </td>
+                    <td>{{ expedienteCliente.fechaAlta | date:'mediumDate' }}</td>
+                    <td>{{ expedienteCliente.fechaAct | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="expedienteCliente.cliente">
+                            <a [routerLink]="['/cliente', expedienteCliente.cliente?.id, 'view']" >{{ expedienteCliente.cliente?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="expedienteCliente.tipoDocumento">
+                            <a [routerLink]="['/cat-tipo-documento', expedienteCliente.tipoDocumento?.id, 'view']" >{{ expedienteCliente.tipoDocumento?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ expedienteCliente.usuarioAlta?.id }}
+                    </td>
+                    <td>
+                        {{ expedienteCliente.usuarioAct?.id }}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/expediente-cliente', expedienteCliente.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/expediente-cliente', expedienteCliente.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(expedienteCliente)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="expedienteClientes && expedienteClientes.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

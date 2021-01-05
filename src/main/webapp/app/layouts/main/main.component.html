@@ -1,0 +1,12 @@
+
+<div *ngIf="isAuthenticated()">
+    <router-outlet name="navbar"></router-outlet>
+</div>
+
+<div class="container-fluid px-0">
+    <router-outlet></router-outlet>
+
+    <jhi-footer *ngIf="isAuthenticated()"></jhi-footer>
+</div>
+
+<ngx-ui-loader></ngx-ui-loader>

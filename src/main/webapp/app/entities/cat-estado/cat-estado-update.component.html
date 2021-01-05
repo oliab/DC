@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">
+        	<form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+	            <h3 id="jhi-cat-estado-heading" jhiTranslate="resaMxWebApp.catEstado.home.createOrEditLabel" class="mb-4 pb-2">Create or edit a Cat Estado</h3>
+	            <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+	                				<jhi-alert-error></jhi-alert-error>
+									<div class="col-md-4">
+						                <div class="form-group">
+						                    <label for="id" jhiTranslate="resaMxWebApp.catEstado.id">ID</label>
+						                    <input type="text" class="form-control" id="id" name="id" formControlName="id" />
+						                    <div *ngIf="editForm.get('id')!.invalid && (editForm.get('id')!.dirty || editForm.get('id')!.touched)">
+                                                <small class="form-text text-danger"
+                                                    *ngIf="editForm.get('id')?.errors?.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                                </small>
+                                                <small class="form-text text-danger"
+                                                    *ngIf="editForm.get('id')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2 }">
+                                                This field cannot be longer than 2 characters.
+                                                </small>
+                                            </div>
+						                </div>
+					                </div>
+									<div class="col-md-4">
+						                <div class="form-group">
+						                    <label class="form-control-label" jhiTranslate="resaMxWebApp.catEstado.nombre" for="field_nombre">Nombre</label>
+						                    <input type="text" class="form-control" name="nombre" id="field_nombre"
+						                           formControlName="nombre"/>
+						                    <div *ngIf="editForm.get('nombre')!.invalid && (editForm.get('nombre')!.dirty || editForm.get('nombre')!.touched)">
+						                        <small class="form-text text-danger"
+						                               *ngIf="editForm.get('nombre')?.errors?.required" jhiTranslate="entity.validation.required">
+						                        This field is required.
+						                        </small>
+						                        <small class="form-text text-danger"
+						                               *ngIf="editForm.get('nombre')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+						                        This field cannot be longer than 100 characters.
+						                        </small>
+						                    </div>
+						                </div>
+					                </div>
+									<div class="col-md-4">
+						                <div class="form-group">
+						                    <label class="form-control-label" jhiTranslate="resaMxWebApp.catEstado.pais" for="field_pais">Pais</label>
+						                    <select class="form-control" id="field_pais" name="pais" formControlName="pais">
+						                        <option *ngIf="!editForm.get('pais')!.value" [ngValue]="null" selected></option>
+						                        <option [ngValue]="catPaisOption.id === editForm.get('pais')!.value?.id ? editForm.get('pais')!.value : catPaisOption" *ngFor="let catPaisOption of catpais; trackBy: trackById">{{ catPaisOption.nombre }}</option>
+						                    </select>
+						                </div>
+						                <div *ngIf="editForm.get('pais')!.invalid && (editForm.get('pais')!.dirty || editForm.get('pais')!.touched)">
+						                    <small class="form-text text-danger"
+						                           *ngIf="editForm.get('pais')?.errors?.required" jhiTranslate="entity.validation.required">
+						                        This field is required.
+						                    </small>
+						                </div>
+					                </div>
+	            				</div>
+	            				<div class="row">
+                                    <div class="col-12 text-right">
+						                <button type="button" id="cancel-save" class="btn btn-outline-primary px-4" (click)="previousState()">
+						                    <i class="mdi mdi-cancel mr-2"></i><span jhiTranslate="entity.action.cancel">Cancel</span>
+						                </button>
+						
+						                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary px-4">
+						                    <i class="mdi mdi-plus mr-2"></i><span jhiTranslate="entity.action.save">Save</span>
+						                </button>
+					                </div>
+					            </div>
+				            </div>
+			            </div>
+		            </div>
+	            </div>
+	        </form>
+    	</div>
+	</div>
+</div>

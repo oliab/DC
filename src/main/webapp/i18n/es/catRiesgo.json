@@ -1,0 +1,23 @@
+{
+  "resaMxWebApp": {
+    "catRiesgo": {
+      "home": {
+        "title": "Catálogo de Riesgos",
+        "createLabel": "Agregar Riesgo",
+        "createOrEditLabel": "Crear o editar Riesgo",
+        "notFound": "No se han encontrado riesgos"
+      },
+      "created": "Se ha agregado el Riesgo con el identificador {{ param }}",
+      "updated": "Se ha actualizado el Riesgo con el identificador {{ param }}",
+      "deleted": "Se ha eliminado el Riesgo con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Cat Riesgo {{ id }}?"
+      },
+      "detail": {
+        "title": "Cat Riesgo"
+      },
+      "riesgo": "Riesgo",
+      "usuario": "Usuario"
+    }
+  }
+}

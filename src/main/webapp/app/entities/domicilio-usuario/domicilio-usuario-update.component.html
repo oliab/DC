@@ -1,0 +1,184 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-domicilio-usuario-heading" jhiTranslate="resaMxWebApp.domicilioUsuario.home.createOrEditLabel">Create or edit a Domicilio Usuario</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.colonia" for="field_colonia">Colonia</label>
+                    <input type="text" class="form-control" name="colonia" id="field_colonia"
+                           formControlName="colonia"/>
+                    <div *ngIf="editForm.get('colonia')!.invalid && (editForm.get('colonia')!.dirty || editForm.get('colonia')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('colonia')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.calle" for="field_calle">Calle</label>
+                    <input type="text" class="form-control" name="calle" id="field_calle"
+                           formControlName="calle"/>
+                    <div *ngIf="editForm.get('calle')!.invalid && (editForm.get('calle')!.dirty || editForm.get('calle')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('calle')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.noExt" for="field_noExt">No Ext</label>
+                    <input type="text" class="form-control" name="noExt" id="field_noExt"
+                           formControlName="noExt"/>
+                    <div *ngIf="editForm.get('noExt')!.invalid && (editForm.get('noExt')!.dirty || editForm.get('noExt')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('noExt')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.noInt" for="field_noInt">No Int</label>
+                    <input type="text" class="form-control" name="noInt" id="field_noInt"
+                           formControlName="noInt"/>
+                    <div *ngIf="editForm.get('noInt')!.invalid && (editForm.get('noInt')!.dirty || editForm.get('noInt')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('noInt')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.domicilio" for="field_domicilio">Domicilio</label>
+                    <input type="text" class="form-control" name="domicilio" id="field_domicilio"
+                           formControlName="domicilio"/>
+                    <div *ngIf="editForm.get('domicilio')!.invalid && (editForm.get('domicilio')!.dirty || editForm.get('domicilio')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('domicilio')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 512 }">
+                        This field cannot be longer than 512 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.fechaAct" for="field_fechaAct">Fecha Act</label>
+                    <div class="input-group">
+                        <input id="field_fechaAct" type="text" class="form-control" name="fechaAct" ngbDatepicker #fechaActDp="ngbDatepicker" formControlName="fechaAct"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="fechaActDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.nacionalidad" for="field_nacionalidad">Nacionalidad</label>
+                    <select class="form-control" id="field_nacionalidad" name="nacionalidad" formControlName="nacionalidad">
+                        <option *ngIf="!editForm.get('nacionalidad')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="catNacionalidadOption.id === editForm.get('nacionalidad')!.value?.id ? editForm.get('nacionalidad')!.value : catNacionalidadOption" *ngFor="let catNacionalidadOption of catnacionalidads; trackBy: trackById">{{ catNacionalidadOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('nacionalidad')!.invalid && (editForm.get('nacionalidad')!.dirty || editForm.get('nacionalidad')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('nacionalidad')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.paisOrigen" for="field_paisOrigen">Pais Origen</label>
+                    <select class="form-control" id="field_paisOrigen" name="paisOrigen" formControlName="paisOrigen">
+                        <option *ngIf="!editForm.get('paisOrigen')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="catPaisOption.id === editForm.get('paisOrigen')!.value?.id ? editForm.get('paisOrigen')!.value : catPaisOption" *ngFor="let catPaisOption of catpais; trackBy: trackById">{{ catPaisOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('paisOrigen')!.invalid && (editForm.get('paisOrigen')!.dirty || editForm.get('paisOrigen')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('paisOrigen')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.pais" for="field_pais">Pais</label>
+                    <select class="form-control" id="field_pais" name="pais" formControlName="pais">
+                        <option *ngIf="!editForm.get('pais')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="catPaisOption.id === editForm.get('pais')!.value?.id ? editForm.get('pais')!.value : catPaisOption" *ngFor="let catPaisOption of catpais; trackBy: trackById">{{ catPaisOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('pais')!.invalid && (editForm.get('pais')!.dirty || editForm.get('pais')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('pais')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.estado" for="field_estado">Estado</label>
+                    <select class="form-control" id="field_estado" name="estado" formControlName="estado">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="catEstadoOption.id === editForm.get('estado')!.value?.id ? editForm.get('estado')!.value : catEstadoOption" *ngFor="let catEstadoOption of catestados; trackBy: trackById">{{ catEstadoOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.municipio" for="field_municipio">Municipio</label>
+                    <select class="form-control" id="field_municipio" name="municipio" formControlName="municipio">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="catMunicipioOption.id === editForm.get('municipio')!.value?.id ? editForm.get('municipio')!.value : catMunicipioOption" *ngFor="let catMunicipioOption of catmunicipios; trackBy: trackById">{{ catMunicipioOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.localidad" for="field_localidad">Localidad</label>
+                    <select class="form-control" id="field_localidad" name="localidad" formControlName="localidad">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="catLocalidadOption.id === editForm.get('localidad')!.value?.id ? editForm.get('localidad')!.value : catLocalidadOption" *ngFor="let catLocalidadOption of catlocalidads; trackBy: trackById">{{ catLocalidadOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.cp" for="field_cp">Cp</label>
+                    <select class="form-control" id="field_cp" name="cp" formControlName="cp">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="catCPOption.id === editForm.get('cp')!.value?.id ? editForm.get('cp')!.value : catCPOption" *ngFor="let catCPOption of catcps; trackBy: trackById">{{ catCPOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" formControlName="user">
+                        <option *ngIf="!editForm.get('user')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('user')!.invalid && (editForm.get('user')!.dirty || editForm.get('user')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('user')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

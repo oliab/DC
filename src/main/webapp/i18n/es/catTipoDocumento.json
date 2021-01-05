@@ -1,0 +1,23 @@
+{
+  "resaMxWebApp": {
+    "catTipoDocumento": {
+      "home": {
+        "title": "Cat Tipo Documentos",
+        "createLabel": "Crear nuevo Cat Tipo Documento",
+        "createOrEditLabel": "Crear o editar Cat Tipo Documento",
+        "notFound": "Ningún Cat Tipo Documentos encontrado"
+      },
+      "created": "Un nuevo Cat Tipo Documento ha sido creado con el identificador {{ param }}",
+      "updated": "Un Cat Tipo Documento ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Cat Tipo Documento ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Cat Tipo Documento {{ id }}?"
+      },
+      "detail": {
+        "title": "Cat Tipo Documento"
+      },
+      "tipo": "Tipo",
+      "usuario": "Usuario"
+    }
+  }
+}

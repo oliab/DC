@@ -1,0 +1,343 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">
+			<form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+				<h3 class="mb-4 pb-2" id="myUserLabel" jhiTranslate="userManagement.home.createOrEditLabel">
+					Create or edit a User
+				</h3>
+
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div *ngIf="user" class="col-12">
+										<jhi-alert-error></jhi-alert-error>
+
+										<ul class="nav nav-tabs" id="myTab" role="tablist">
+											<li class="nav-item">
+												<a class="nav-link active" id="datosCuenta-tab" data-toggle="tab" href="#datosCuenta"
+													role="tab" aria-controls="datosCuenta" aria-selected="true">
+													{{ 'resaMxWebApp.cliente.datosGenerales' | translate }}
+												</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" id="datosOperacion-tab" data-toggle="tab" href="#datosOperacion"
+													role="tab" aria-controls="datosOperacion" aria-selected="false">
+													{{ 'resaMxWebApp.cliente.datosDireccion' | translate }}
+												</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" id="datosUsuario-tab" data-toggle="tab" href="#datosUsuario" role="tab" 
+													aria-controls="datosUsuario" aria-selected="false">
+													{{ 'resaMxWebApp.cliente.datosEmpresa' | translate }}
+												</a>
+											</li>
+										</ul>
+
+										<div class="tab-content cont-height" id="myTabContent">
+											<div class="tab-pane fade show active" id="datosCuenta" role="tabpanel" aria-labelledby="datosCuenta-tab">
+												<div class="row mt-3">
+													<div class="col-12">
+														<fieldset>
+															<h5>Datos de la cuenta</h5>
+															<div class="row">
+																<div class="col-md-4">
+																	<jhi-form-validator [customErrors]="{ pattern: 'entity.validation.patternLogin' | translate }">
+																			<label class="form-control-label" jhiTranslate="userManagement.login">Login</label>
+																			<input type="text" class="form-control" name="login"
+																				placeholder="{{ 'userManagement.login' | translate }}"
+																				formControlName="login" [(ngModel)]="user.login">
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																			<label class="form-control-label" jhiTranslate="userManagement.firstName">First Name</label>
+																			<input type="text" class="form-control" name="firstName"
+																				placeholder="{{ 'userManagement.firstName' | translate }}"
+																				formControlName="firstName" [(ngModel)]="user.firstName">
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label jhiTranslate="userManagement.lastName">Last Name</label>
+																		<input type="text" class="form-control" name="lastName"
+																				placeholder="{{ 'userManagement.lastName' | translate }}"
+																			formControlName="lastName" [(ngModel)]="user.lastName">
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label jhiTranslate="userManagement.mLastName">Mother Last Name</label>
+																		<input type="text" class="form-control" name="mLastName"
+																				placeholder="{{ 'userManagement.mLastName' | translate }}"
+																			formControlName="mLastName" [(ngModel)]="user.mLastName">	                    
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="userManagement.fechaNacimiento" for="field_fechaNacimiento">Fecha Nacimiento</label>
+																		<div class="input-group">
+																			<input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" ngbDatepicker #fechaNacimientoDp="ngbDatepicker" 
+																					placeholder="{{ 'userManagement.fechaNacimiento' | translate }}"
+																					formControlName="fechaNacimiento" [(ngModel)]="user.fechaNacimiento"/>
+																			<span class="input-group-append">
+																				<button type="button" class="btn btn-secondary" (click)="fechaNacimientoDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+																			</span>
+																		</div>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator [customErrors]="{ email: 'global.messages.validate.email.invalid' | translate }">
+																		<label class="form-control-label" jhiTranslate="userManagement.email">Email</label>
+																		<input type="email" class="form-control" name="email" 
+																				placeholder="{{ 'userManagement.email' | translate }}"
+																				formControlName="email"  [(ngModel)]="user.email">
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<div class="form-check">
+																		<label class="form-check-label" for="activated">
+																			<input class="form-check-input" [attr.disabled]="user.id === undefined ? 'disabled' : null"
+																				type="checkbox" id="activated" name="activated" formControlName="activated" [(ngModel)]="user.activated">
+																			<span jhiTranslate="userManagement.activated">Activated</span>
+																		</label>
+																	</div>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label jhiTranslate="userManagement.profiles">Profiles</label>
+																		<select class="form-control" multiple name="authority" formControlName="authorities" [(ngModel)]="user.authorities">
+																			<option *ngFor="let authority of authorities" [value]="authority">{{ authority }}</option>
+																		</select>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<div class="form-group" *ngIf="user.domicilioUsuario">
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.fechaAct" for="field_fechaAct">Fecha Act</label>
+																		<div class="input-group">
+																			<input id="field_fechaAct" type="text" class="form-control" name="fechaAct" ngbDatepicker #fechaActDp="ngbDatepicker" 
+																					placeholder="{{ 'resaMxWebApp.domicilioUsuario.fechaAct' | translate }}"
+																					[(ngModel)]="user.domicilioUsuario.fechaAct"
+																					formControlName="fechaAct" readonly/>
+																		</div>
+																	</div>  
+																</div>
+															</div>					              
+														</fieldset>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="datosOperacion" role="tabpanel" aria-labelledby="datosOperacion-tab">
+												<div class="row mt-3">
+													<div class="col-12">
+														<fieldset>
+															<h5>Datos de operación del usuario</h5>
+															<div class="row">
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.datosUsuario.puesto" for="field_puesto">Puesto</label>
+																		<input type="text" class="form-control" name="puesto" id="field_puesto" [(ngModel)]="datosUsuario.puesto"
+																				placeholder="{{ 'resaMxWebApp.datosUsuario.puesto' | translate }}"
+																				formControlName="puesto"/>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.datosUsuario.sucursal" for="field_nacionalidad">Nacionalidad</label>
+																		<ngx-select id="field_sucursal" 
+																				name="sucursal" formControlName="sucursal"
+																				class="form-control"
+																				[items]="catsucursales" [allowClear]="true" placeholder="Seleccione una sucursal" 
+																				optionValueField="id" optionTextField="nombre"
+																				noResultsFound="{{'error.noResults' | translate }}"
+																				[(ngModel)]="datosUsuario.sucursalId">
+																		</ngx-select>
+																	</jhi-form-validator>													
+																</div>												
+															</div>
+														</fieldset>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="datosUsuario" role="tabpanel" aria-labelledby="datosUsuario-tab">
+												<div class="row mt-3">
+													<div class="col-12">
+														<fieldset>
+															<h5>Datos del usuario</h5>
+															<div class="row">
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.nacionalidad" for="field_nacionalidad">Nacionalidad</label>
+																		<ngx-select id="field_nacionalidad" 
+																				name="nacionalidad" formControlName="nacionalidad"
+																				class="form-control"
+																				[items]="catnacionalidads" [allowClear]="true" placeholder="Seleccione una nacionalidad" 
+																				optionValueField="id" optionTextField="nacionalidad"
+																				(select)="onNacionalidad()"
+																				noResultsFound="{{'error.noResults' | translate }}"
+																				[(ngModel)]="domicilioUsuario.nacionalidadId">
+																		</ngx-select>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.paisOrigen" for="field_paisOrigen">Pais Origen</label>
+																		<ngx-select id="field_paisOrigen" [disabled]="domicilioUsuario.nacionalidadId === NacionalidadEnum.MEXICANO"
+																					name="paisOrigen" formControlName="paisOrigen"
+																					class="form-control"
+																					[items]="catpaisExt" [allowClear]="true" placeholder="Seleccione un país" 
+																					optionValueField="id" optionTextField="nombre"
+																					noResultsFound="{{'error.noResults' | translate }}"
+																					[(ngModel)]="domicilioUsuario.paisOrigenId">
+																		</ngx-select>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<div *ngIf="domicilioUsuario.nacionalidadId">
+																		<jhi-form-validator>
+																			<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.pais" for="field_pais">Pais</label>
+																			<ngx-select id="field_pais" 
+																						name="pais" formControlName="pais"
+																						class="form-control"
+																						[items]="catpaisExt" [allowClear]="true" placeholder="Seleccione un país" 
+																						optionValueField="id" optionTextField="nombre"
+																						(select)="onPais()"
+																						noResultsFound="{{'error.noResults' | translate }}"
+																						[(ngModel)]="domicilioUsuario.paisId">
+																			</ngx-select>
+																		</jhi-form-validator>						
+																	</div>
+																</div>
+															</div>
+				
+															<div class="row" *ngIf="domicilioUsuario.nacionalidadId && domicilioUsuario.paisId === PaisEnum.MEXICO">
+																<div class="col-12">
+																	<label>Direcci&oacute;n del usuario:</label>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.estado" for="field_estado">Estado</label>
+																		<ngx-select id="field_estado" 
+																				name="estado" formControlName="estado"
+																				class="form-control"
+																				[items]="catestados" [allowClear]="true" placeholder="Seleccione un estado" 
+																				optionValueField="id" optionTextField="nombre"
+																				(select)="onEstado()"
+																				noResultsFound="{{'error.noResults' | translate }}"
+																				[(ngModel)]="domicilioUsuario.estadoId">
+																		</ngx-select>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.municipio" for="field_municipio">Municipio</label>								
+																		<ngx-select id="field_municipio" 
+																				name="municipio" formControlName="municipio"
+																				class="form-control"
+																				[items]="catmunicipios" [allowClear]="true" placeholder="Seleccione un municipio" 
+																				optionValueField="id" optionTextField="nombre"
+																				(select)="onMunicipio()"
+																				noResultsFound="{{'error.noResults' | translate }}"
+																				[(ngModel)]="domicilioUsuario.municipioId">
+																		</ngx-select>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.localidad" for="field_localidad">Localidad</label>
+																		<ngx-select id="field_localidad" 
+																				name="localidad" formControlName="localidad"
+																				class="form-control"
+																				[items]="catlocalidads" [allowClear]="true" placeholder="Seleccione una localidad" 
+																				optionValueField="id" optionTextField="nombre"
+																				noResultsFound="{{'error.noResults' | translate }}"
+																				[(ngModel)]="domicilioUsuario.localidadId">
+																		</ngx-select>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.cp" for="field_cp">Cp</label>
+																		<ngx-select id="field_cp" 
+																				name="cp" formControlName="cp"
+																				class="form-control"
+																				[items]="catcps" [allowClear]="true" placeholder="Seleccione un CP" 
+																				optionValueField="id" optionTextField="id"
+																				noResultsFound="{{'error.noResults' | translate }}"
+																				[(ngModel)]="domicilioUsuario.cpId">
+																		</ngx-select>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.colonia" for="field_colonia">Colonia</label>
+																		<input type="text" class="form-control" name="colonia" id="field_colonia" [(ngModel)]="domicilioUsuario.colonia"
+																			placeholder="{{ 'resaMxWebApp.domicilioUsuario.colonia' | translate }}"
+																			formControlName="colonia"/>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.calle" for="field_calle">Calle</label>
+																		<input type="text" class="form-control" name="calle" id="field_calle" [(ngModel)]="domicilioUsuario.calle"
+																				placeholder="{{ 'resaMxWebApp.domicilioUsuario.calle' | translate }}"
+																				formControlName="calle"/>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.noExt" for="field_noExt">No Ext</label>
+																		<input type="text" class="form-control" name="noExt" id="field_noExt" [(ngModel)]="domicilioUsuario.noExt"
+																				placeholder="{{ 'resaMxWebApp.domicilioUsuario.noExt' | translate }}"
+																				formControlName="noExt"/>
+																	</jhi-form-validator>
+																</div>
+																<div class="col-md-4">
+																	<jhi-form-validator>
+																		<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.noInt" for="field_noInt">No Int</label>
+																		<input type="text" class="form-control" name="noInt" id="field_noInt" [(ngModel)]="domicilioUsuario.noInt"
+																				placeholder="{{ 'resaMxWebApp.domicilioUsuario.noInt' | translate }}"
+																				formControlName="noInt"/>
+																	</jhi-form-validator>  
+																</div>										
+															</div>
+															<div class="row">
+																<div class="col-md-4">
+																	<div *ngIf="domicilioUsuario.nacionalidadId && domicilioUsuario.paisId && domicilioUsuario.paisId !== PaisEnum.MEXICO">							
+																		<jhi-form-validator>
+																			<label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.domicilio" for="field_domicilio">Domicilio</label>
+																			<input type="text" class="form-control" name="domicilio" id="field_domicilio" [(ngModel)]="domicilioUsuario.domicilio"
+																					placeholder="{{ 'resaMxWebApp.domicilioUsuario.domicilio' | translate }}"
+																					formControlName="domicilio"/>
+																		</jhi-form-validator>
+																	</div>   
+																</div>
+															</div>	
+														</fieldset>															
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row mt-3">
+									<div class="col-12 text-right">
+										<div *ngIf="user">
+											<button type="button" class="btn btn-outline-primary px-4" (click)="previousState()">
+												<i class="mdi mdi-cancel mr-2"></i><span jhiTranslate="entity.action.cancel">Cancel</span>
+											</button>
+						
+											<button type="submit" class="btn btn-primary px-4" [disabled]="editForm.invalid || isSaving">
+												<i class="mdi mdi-plus mr-2"></i><span jhiTranslate="entity.action.save">Save</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+    </div>
+</div>

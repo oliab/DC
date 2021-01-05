@@ -1,0 +1,88 @@
+<div class="container-fluid">
+    <div class="row pt-5 mb-4">
+        <div class="col-6">
+            <h3>
+                <span id="metrics-page-heading" jhiTranslate="metrics.title">Application Metrics</span>        
+            </h3>
+        </div>
+        <div class="col-6 text-right">
+            <button class="btn btn-primary px-4 shadow-sm" (click)="refresh()">
+                <i class="mdi mdi-sync mr-2"></i><span jhiTranslate="metrics.refresh.button">Refresh</span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 jhiTranslate="metrics.jvm.title">JVM Metrics</h5>
+                            <div class="row" *ngIf="metrics && !updatingMetrics">
+                                <jhi-jvm-memory
+                                    class="col-md-4"
+                                    [updating]="updatingMetrics"
+                                    [jvmMemoryMetrics]="metrics.jvm">
+                                </jhi-jvm-memory>
+                        
+                                <jhi-jvm-threads
+                                    class="col-md-4"
+                                    [threadData]="threads">
+                                </jhi-jvm-threads>
+                        
+                                <jhi-metrics-system
+                                    class="col-md-4"
+                                    [updating]="updatingMetrics"
+                                    [systemMetrics]="metrics.processMetrics">
+                                </jhi-metrics-system>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <div *ngIf="metrics && metricsKeyExists('garbageCollector')">
+                                <h5 jhiTranslate="metrics.jvm.gc.title">Garbage collector statistics</h5>
+                        
+                                <jhi-metrics-garbagecollector
+                                    [updating]="updatingMetrics"
+                                    [garbageCollectorMetrics]="metrics.garbageCollector">
+                                </jhi-metrics-garbagecollector>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="well well-lg" *ngIf="updatingMetrics" jhiTranslate="metrics.updating">Updating...</div>
+
+                            <jhi-metrics-request
+                                *ngIf="metrics && metricsKeyExists('http.server.requests')"
+                                [updating]="updatingMetrics"
+                                [requestMetrics]="metrics['http.server.requests']">
+                            </jhi-metrics-request>
+                        
+                            <jhi-metrics-endpoints-requests
+                                *ngIf="metrics && metricsKeyExists('services')"
+                                [updating]="updatingMetrics"
+                                [endpointsRequestsMetrics]="metrics.services">
+                            </jhi-metrics-endpoints-requests>
+                        
+                            <jhi-metrics-cache
+                                *ngIf="metrics && metricsKeyExists('cache')"
+                                [updating]="updatingMetrics"
+                                [cacheMetrics]="metrics.cache">
+                            </jhi-metrics-cache>
+                        
+                            <jhi-metrics-datasource
+                                *ngIf="metrics && metricsKeyExistsAndObjectNotEmpty('databases')"
+                                [updating]="updatingMetrics"
+                                [datasourceMetrics]="metrics.databases">
+                            </jhi-metrics-datasource>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

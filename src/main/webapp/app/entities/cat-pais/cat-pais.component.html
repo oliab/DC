@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="row pt-5 mb-4">
+        <div class="col-6">
+            <h3 id="page-heading">
+                <span jhiTranslate="resaMxWebApp.catPais.home.title">Cat Pais</span>
+            </h3>
+        </div>
+        <div class="col-6 text-right">
+            <button id="jh-create-entity" class="btn btn-primary px-4 shadow-sm jh-create-entity create-cat-pais" [routerLink]="['/cat-pais/new']">
+                <i class="mdi mdi-plus mr-2"></i>
+                <span  jhiTranslate="resaMxWebApp.catPais.home.createLabel">
+                Create a new Cat Pais
+                </span>
+            </button>
+        </div>
+    </div>
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+    <div class="row mb-2">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                	<div class="row">
+                		<div class="col-lg-3">
+                			<div class="form-group">
+			                    <input type="text" class="form-control form-control-sm" [(ngModel)]="filterId" placeholder="Buscar {{'resaMxWebApp.catPais.id'|translate}}"/>
+			                </div>
+                		</div>
+                		<div class="col-lg-3">
+                			<div class="form-group">
+			                    <input type="text" class="form-control form-control-sm" [(ngModel)]="filterNombre" placeholder="Buscar {{'resaMxWebApp.catPais.nombre'|translate}}"/>
+			                </div>
+                		</div>
+                		<div class="col-lg-3">
+                			<div class="form-group">
+			                    <input type="text" class="form-control form-control-sm" [(ngModel)]="filterCodigo" placeholder="Buscar {{'resaMxWebApp.catPais.codigo'|translate}}"/>
+			                </div>
+                        </div>       
+                        <div class="col-md-3">
+                			<button class="btn btn-outline-primary btn-sm" (click)="onLimpiar()">Limpiar</button>
+                			<button class="btn btn-primary btn-sm" (click)="onBuscar()">Buscar</button>
+                        </div>         		
+                	</div>
+            
+                
+                    <div class="alert alert-warning" id="no-result" *ngIf="catPais?.length === 0">
+                        <span jhiTranslate="resaMxWebApp.catPais.home.notFound">No catPais found</span>
+                    </div>
+                
+                    <div class="table-responsive mb-5" id="entities" *ngIf="catPais && catPais.length > 0">
+                        <table class="table" aria-describedby="page-heading">
+                            <thead>
+                                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="resaMxWebApp.catPais.id">ID</span></th>
+                                    <th scope="col"  jhiSortBy="nombre"><span jhiTranslate="resaMxWebApp.catPais.nombre">Nombre</span></th>
+                                    <th scope="col"  jhiSortBy="codigoA2"><span jhiTranslate="resaMxWebApp.catPais.codigoA2">Codigo A 2</span></th>
+                                    <th scope="col"  jhiSortBy="codigoA3"><span jhiTranslate="resaMxWebApp.catPais.codigoA3">Codigo A 3</span></th>
+                                    <th scope="col"  jhiSortBy="usuario.id"><span jhiTranslate="resaMxWebApp.catPais.usuario">Usuario</span></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let catPais of catPais ;trackBy: trackId">
+                                    <td><a [routerLink]="['/cat-pais', catPais.id, 'view']">{{ catPais.id }}</a></td>
+                                    <td>{{ catPais.nombre }}</td>
+                                    <td>{{ catPais.codigoA2 }}</td>
+                                    <td>{{ catPais.codigoA3 }}</td>
+                                    <td>
+                                        {{catPais.usuario?.firstName + ' ' + catPais.usuario?.lastName}}
+                                    </td>
+                                    <td class="text-right">
+                                        <button type="submit"
+                                                [routerLink]="['/cat-pais', catPais.id, 'view']"
+                                                class="btn btn-outline-primary btn-sm px-2">
+                                            <i class="mdi mdi-eye mr-2"></i>
+                                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                        </button>
+            
+                                        <button type="submit"
+                                                [routerLink]="['/cat-pais', catPais.id, 'edit']"
+                                                class="btn btn-outline-primary btn-sm px-2">
+                                                <i class="mdi mdi-pencil mr-2"></i>
+                                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                        </button>
+            
+                                        <button type="submit" (click)="delete(catPais)"
+                                                class="btn btn-outline-primary btn-sm px-2">
+                                                <i class="mdi mdi-trash-can mr-2"></i>
+                                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                        </button>                                        
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                
+                    <div *ngIf="catPais && catPais.length > 0" class="pt-5">
+                        <div class="row justify-content-center mb-3">
+                            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage" class="page-txt"></jhi-item-count>
+                        </div>
+                
+                        <div class="row justify-content-center">
+                            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

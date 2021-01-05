@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">
+            <div *ngIf="catSector">
+                <h3 class="mb-4 pb-2"><span jhiTranslate="resaMxWebApp.catSector.detail.title">Cat Sector</span> {{ catSector.id }}</h3>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <jhi-alert-error></jhi-alert-error>
+                                    <dl class="row jh-entity-details">
+                                        <div class="col-md-4">
+                                            <dt><span jhiTranslate="resaMxWebApp.catSector.actividadEconomica">Actividad Economica</span></dt>
+                                            <dd>
+                                                <span>{{ catSector.actividadEconomica }}</span>
+                                            </dd>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <dt><span jhiTranslate="resaMxWebApp.catSector.actividadVulnerable">Actividad Vulnerable</span></dt>
+                                            <dd>
+                                                <span>{{ catSector.actividadVulnerable ? 'S&iacute;' : 'No' }}</span>
+                                            </dd>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <dt><span jhiTranslate="resaMxWebApp.catSector.usuario">Usuario</span></dt>
+                                            <dd>
+                                                {{ catSector.usuario?.firstName + ' ' +  catSector.usuario?.lastName }}
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                    <div class="row">
+                                        <div class="col-12 text-right">
+                                            <button type="submit"
+                                            (click)="previousState()"
+                                            class="btn btn-outline-primary px-4">
+                                            <i class="mdi mdi-arrow-left mr-2"></i><span jhiTranslate="entity.action.back">Back</span>
+                                    </button>
+                    
+                                    <button type="button"
+                                            [routerLink]="['/cat-sector', catSector.id, 'edit']"
+                                            class="btn btn-primary px-4">
+                                            <i class="mdi mdi-pencil mr-2"></i><span jhiTranslate="entity.action.edit">Edit</span>
+                                    </button>
+                                        </div>
+                                    </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

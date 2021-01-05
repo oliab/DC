@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+  <title th:text="#{email.activation.title}">Activacion</title>
+  <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+</head>
+<body style="background:#F5F6F6; font-family: Arial,Verdana,sans-serif;">
+  <table align="center" cellpadding="0" cellspacing="0" width="640" style="width:600px;">
+    <tbody>
+      <tr>
+        <td align="center" valign="top" width="100%">
+          <table align="right" cellpadding="0" cellspacing="0" width="100%" bgcolor="#29293D" style="background-color:#BCDC87;overflow:hidden;min-width:100%;width:100%;padding:0" >
+            <tbody>
+              <tr>
+                <td height="10"></td>
+              </tr>
+              <tr>
+                <td><img src="http://168.61.41.180/dinerocerca/logo.png" width="80" style="padding-left:20px"></td>
+              </tr>
+              <tr>
+                <td height="10"></td>
+              </tr>
+            </tbody>
+          </table>
+          <table cellpadding="0" cellspacing="0" width="100%" background="http://168.61.41.180/dinerocerca/bg.png" bgcolor="#FFFFFF" style="color:#6D6D6D;background-size: cover; background-repeat: no-repeat; background-position-y: 80%;">
+            <tbody>
+              <tr>
+                <td height="60"></td>
+              </tr>
+              <tr>
+                <td width="45"></td>
+                <td valign="top" align="center" style="margin:0 auto;width:510px; margin-bottom:20px; font-size:18px" width="510">
+                  <span th:text="#{email.activation.greeting(${user.login})}">Estimado</span>
+                </td>
+                <td width="45"></td>
+              </tr>
+              <tr>
+                <td colspan="3" height="45"></td>
+              </tr>
+              <tr>
+                <td width="45"></td>
+                <td valign="top" align="center" style="margin:0 auto;width:510px; margin-bottom:20px; font-size:14px" width="510">
+                  <span>Se ha creado su cuenta de</span> <span style="color:#7EAA60; font-weight:bold;">Dinero Cerca</span><span>, haga clic en<br> la URL a continuación para activarla:</span>
+                </td>
+                <td width="45"></td>
+              </tr>
+              <tr>
+                <td colspan="3" height="30"></td>
+              </tr>
+              <tr>
+                <td width="45"></td>
+                <td valign="top" align="center" style="margin:0 auto;width:510px; font-size:14px" width="510">
+                  <a th:with="url=(@{|${baseUrl}/account/reset/finish?key=${user.resetKey}|})" th:href="${url}"
+            		 th:text="${url}">Acceso</a>
+                </td>
+                <td width="45"></td>
+              </tr>
+              <tr>
+                <td colspan="3" height="60"></td>
+              </tr>
+              <tr>
+                <td width="45"></td>
+                <td colspan="3" height="2" style="border-bottom:1px solid #E6E1E1;"></td>
+                <td width="45"></td>
+              </tr>
+              <tr>
+                <td colspan="3" height="10"></td>
+              </tr>
+              <tr>
+                <td width="45"></td>
+                <td valign="top" style="margin:0 auto;width:510px; margin-top:20px" width="510">
+                  <span style="font-size:14px; color:#6D6D6D;" th:text="#{email.activation.web.equipo}">El equipo de DINERO CERCA</span><br>
+                  <span style="font-size:10px; color:#BABABA;" th:text="#{email.activation.web.copyright}">Dinero Cerca 2020.</span>
+                </td>
+                <td width="45"></td>
+              </tr>
+              <tr>
+                <td colspan="3" height="20"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

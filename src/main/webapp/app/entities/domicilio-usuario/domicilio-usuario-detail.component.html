@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="domicilioUsuario">
+            <h2><span jhiTranslate="resaMxWebApp.domicilioUsuario.detail.title">Domicilio Usuario</span> {{ domicilioUsuario.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.colonia">Colonia</span></dt>
+                <dd>
+                    <span>{{ domicilioUsuario.colonia }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.calle">Calle</span></dt>
+                <dd>
+                    <span>{{ domicilioUsuario.calle }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.noExt">No Ext</span></dt>
+                <dd>
+                    <span>{{ domicilioUsuario.noExt }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.noInt">No Int</span></dt>
+                <dd>
+                    <span>{{ domicilioUsuario.noInt }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.domicilio">Domicilio</span></dt>
+                <dd>
+                    <span>{{ domicilioUsuario.domicilio }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.fechaAct">Fecha Act</span></dt>
+                <dd>
+                    <span>{{ domicilioUsuario.fechaAct }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.nacionalidad">Nacionalidad</span></dt>
+                <dd>
+                    <div *ngIf="domicilioUsuario.nacionalidad">
+                        <a [routerLink]="['/cat-nacionalidad', domicilioUsuario.nacionalidad?.id, 'view']">{{ domicilioUsuario.nacionalidad?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.paisOrigen">Pais Origen</span></dt>
+                <dd>
+                    <div *ngIf="domicilioUsuario.paisOrigen">
+                        <a [routerLink]="['/cat-pais', domicilioUsuario.paisOrigen?.id, 'view']">{{ domicilioUsuario.paisOrigen?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.pais">Pais</span></dt>
+                <dd>
+                    <div *ngIf="domicilioUsuario.pais">
+                        <a [routerLink]="['/cat-pais', domicilioUsuario.pais?.id, 'view']">{{ domicilioUsuario.pais?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.estado">Estado</span></dt>
+                <dd>
+                    <div *ngIf="domicilioUsuario.estado">
+                        <a [routerLink]="['/cat-estado', domicilioUsuario.estado?.id, 'view']">{{ domicilioUsuario.estado?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.municipio">Municipio</span></dt>
+                <dd>
+                    <div *ngIf="domicilioUsuario.municipio">
+                        <a [routerLink]="['/cat-municipio', domicilioUsuario.municipio?.id, 'view']">{{ domicilioUsuario.municipio?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.localidad">Localidad</span></dt>
+                <dd>
+                    <div *ngIf="domicilioUsuario.localidad">
+                        <a [routerLink]="['/cat-localidad', domicilioUsuario.localidad?.id, 'view']">{{ domicilioUsuario.localidad?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.cp">Cp</span></dt>
+                <dd>
+                    <div *ngIf="domicilioUsuario.cp">
+                        <a [routerLink]="['/cat-cp', domicilioUsuario.cp?.id, 'view']">{{ domicilioUsuario.cp?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.domicilioUsuario.user">User</span></dt>
+                <dd>
+                    {{ domicilioUsuario.user?.id }}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/domicilio-usuario', domicilioUsuario.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "resaMxWebApp": {
+    "catMoneda": {
+      "home": {
+        "title": "Catálogo de Monedas",
+        "createLabel": "Agregar Moneda",
+        "createOrEditLabel": "Crear o editar Moneda",
+        "notFound": "No se han encontrado Monedas"
+      },
+      "created": "Se ha agregado la Moneda con el identificador {{ param }}",
+      "updated": "Se ha actualizado la Moneda con el identificador {{ param }}",
+      "deleted": "Se ha eliminado la Moneda con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar la Moneda {{ id }}?"
+      },
+      "detail": {
+        "title": "Moneda"
+      },
+      "id": "Clave",
+      "moneda": "Moneda",
+      "usuario": "Usuario",
+      "pais": "País"
+    }
+  }
+}

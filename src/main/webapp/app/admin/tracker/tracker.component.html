@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row pt-5 mb-4">
+        <div class="col-12">
+            <h3 id="tracker-page-heading" jhiTranslate="tracker.title">Real-time user activities</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table" aria-describedby="tracker-page-heading">
+                            <thead>
+                                <tr>
+                                    <th scope="col" jhiTranslate="tracker.table.userlogin">User</th>
+                                    <th scope="col" jhiTranslate="tracker.table.ipaddress">IP Address</th>
+                                    <th scope="col" jhiTranslate="tracker.table.page">Current page</th>
+                                    <th scope="col" jhiTranslate="tracker.table.time">Time</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let activity of activities">
+                                    <td>{{ activity.userLogin }}</td>
+                                    <td>{{ activity.ipAddress }}</td>
+                                    <td>{{ activity.page }}</td>
+                                    <td>{{ activity.time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

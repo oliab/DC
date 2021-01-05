@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="row pt-5 mb-4">
+        <div class="col-6">
+            <h3 id="page-heading">
+                <span jhiTranslate="resaMxWebApp.catTipoOperacion.home.title">Cat Tipo Operacions</span>        
+            </h3>
+        </div>
+        <div class="col-6 text-right">
+            <button id="jh-create-entity" class="btn btn-primary px-4 shadow-sm jh-create-entity create-cat-tipo-operacion" [routerLink]="['/cat-tipo-operacion/new']">
+                <i class="mdi mdi-plus mr-2"></i>
+                <span  jhiTranslate="resaMxWebApp.catTipoOperacion.home.createLabel">
+                Create a new Cat Tipo Operacion
+                </span>
+            </button>
+        </div>        
+    </div>
+
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-warning" id="no-result" *ngIf="catTipoOperacions?.length === 0">
+                        <span jhiTranslate="resaMxWebApp.catTipoOperacion.home.notFound">No catTipoOperacions found</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive mb-5" id="entities" *ngIf="catTipoOperacions && catTipoOperacions.length > 0">
+                                <table class="table" aria-describedby="page-heading">
+                                    <thead>
+                                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                                            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="operacion"><span jhiTranslate="resaMxWebApp.catTipoOperacion.operacion">Operacion</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="descripcion"><span jhiTranslate="resaMxWebApp.catTipoOperacion.descripcion">Descripcion</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="usuario.id"><span jhiTranslate="resaMxWebApp.catTipoOperacion.usuario">Usuario</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let catTipoOperacion of catTipoOperacions ;trackBy: trackId">
+                                            <td><a [routerLink]="['/cat-tipo-operacion', catTipoOperacion.id, 'view']">{{ catTipoOperacion.id }}</a></td>
+                                            <td>{{ catTipoOperacion.operacion }}</td>
+                                            <td>{{ catTipoOperacion.descripcion }}</td>
+                                            <td>
+                                                {{ catTipoOperacion.usuario?.firstName + ' ' +  catTipoOperacion.usuario?.lastName }}
+                                            </td>
+                                            <td class="text-right">
+                                                    <button type="submit"
+                                                            [routerLink]="['/cat-tipo-operacion', catTipoOperacion.id, 'view']"
+                                                            class="btn btn-outline-primary btn-sm px-2">
+                                                            <i class="mdi mdi-eye mr-2"></i>
+                                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                                    </button>
+                        
+                                                    <button type="submit"
+                                                            [routerLink]="['/cat-tipo-operacion', catTipoOperacion.id, 'edit']"
+                                                            class="btn btn-outline-primary btn-sm px-2">
+                                                            <i class="mdi mdi-pencil mr-2"></i>
+                                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                                    </button>
+                        
+                                                    <button type="submit" (click)="delete(catTipoOperacion)"
+                                                        class="btn btn-outline-primary btn-sm px-2">
+                                                        <i class="mdi mdi-trash-can mr-2"></i>
+                                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                                    </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                            <div *ngIf="catTipoOperacions && catTipoOperacions.length > 0" class="pt-5">
+                                <div class="row justify-content-center mb-3">
+                                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                                </div>
+                        
+                                <div class="row justify-content-center">
+                                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

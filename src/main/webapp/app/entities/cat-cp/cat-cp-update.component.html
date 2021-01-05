@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">
+            <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+                <h3 id="jhi-cat-cp-heading" jhiTranslate="resaMxWebApp.catCP.home.createOrEditLabel" class="mb-4 pb-2">Create or edit a Cat CP</h3>
+    
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <jhi-alert-error></jhi-alert-error>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="id" jhiTranslate="resaMxWebApp.catCP.id">ID</label>
+                                            <input type="text" class="form-control" id="id" name="id" formControlName="id" />
+                                            <div *ngIf="editForm.get('id')!.invalid && (editForm.get('id')!.dirty || editForm.get('id')!.touched)">
+                                                <small class="form-text text-danger"
+                                                    *ngIf="editForm.get('id')?.errors?.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                                </small>
+                                                <small class="form-text text-danger"
+                                                    *ngIf="editForm.get('id')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 5 }">
+                                                This field cannot be longer than 5 characters.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" jhiTranslate="resaMxWebApp.catCP.anio" for="field_anio">Anio</label>
+                                            <input type="number" class="form-control" name="anio" id="field_anio"
+                                                   formControlName="anio"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" jhiTranslate="resaMxWebApp.catCP.estado" for="field_estado">Estado</label>
+                                            <select class="form-control" id="field_estado" name="estado" formControlName="estado" [(ngModel)]="selEstado" (change)="onEstado()">
+                                                <option *ngIf="!editForm.get('estado')!.value" [ngValue]="null" selected>Seleccione un estado</option>
+                                                <option [ngValue]="catEstadoOption.id === editForm.get('estado')!.value?.id ? editForm.get('estado')!.value : catEstadoOption" *ngFor="let catEstadoOption of catestados; trackBy: trackById">
+                                                    {{ catEstadoOption.nombre }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div *ngIf="editForm.get('estado')!.invalid && (editForm.get('estado')!.dirty || editForm.get('estado')!.touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('estado')?.errors?.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" jhiTranslate="resaMxWebApp.catCP.municipio" for="field_municipio">Municipio</label>
+                                            <select class="form-control" id="field_municipio" name="municipio" formControlName="municipio" [(ngModel)]="selMunicipio">
+                                                <option *ngIf="!editForm.get('municipio')!.value" [ngValue]="null" selected>Seleccione un municipio</option>
+                                                <option [ngValue]="catMunicipioOption.id === editForm.get('municipio')!.value?.id ? editForm.get('municipio')!.value : catMunicipioOption" *ngFor="let catMunicipioOption of catmunicipios; trackBy: trackById">
+                                                    {{ catMunicipioOption.nombre }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div *ngIf="editForm.get('municipio')!.invalid && (editForm.get('municipio')!.dirty || editForm.get('municipio')!.touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('municipio')?.errors?.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" jhiTranslate="resaMxWebApp.catCP.riesgo" for="field_riesgo">Riesgo</label>
+                                            <select class="form-control" id="field_riesgo" name="riesgo" formControlName="riesgo">
+                                                <option *ngIf="!editForm.get('riesgo')!.value" [ngValue]="null" selected>Seleccione un riesgo</option>
+                                                <option [ngValue]="catRiesgoOption.id === editForm.get('riesgo')!.value?.id ? editForm.get('riesgo')!.value : catRiesgoOption" *ngFor="let catRiesgoOption of catriesgos; trackBy: trackById">
+                                                    {{ catRiesgoOption.riesgo }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div *ngIf="editForm.get('riesgo')!.invalid && (editForm.get('riesgo')!.dirty || editForm.get('riesgo')!.touched)">
+                                            <small class="form-text text-danger"
+                                                   *ngIf="editForm.get('riesgo')?.errors?.required" jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 text-right">
+                                        <button type="button" id="cancel-save" class="btn btn-outline-primary px-4" (click)="previousState()">
+                                            <i class="mdi mdi-cancel mr-2"></i><span jhiTranslate="entity.action.cancel">Cancel</span>
+                                        </button>
+                        
+                                        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary px-4">
+                                            <i class="mdi mdi-plus mr-2"></i><span jhiTranslate="entity.action.save">Save</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

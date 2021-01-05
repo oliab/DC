@@ -1,0 +1,25 @@
+{
+  "resaMxWebApp": {
+    "datosUsuario": {
+      "home": {
+        "title": "Datos Usuarios",
+        "createLabel": "Crear nuevo Datos Usuario",
+        "createOrEditLabel": "Crear o editar Datos Usuario",
+        "notFound": "Ningún Datos Usuarios encontrado"
+      },
+      "created": "Un nuevo Datos Usuario ha sido creado con el identificador {{ param }}",
+      "updated": "Un Datos Usuario ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Datos Usuario ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Datos Usuario {{ id }}?"
+      },
+      "detail": {
+        "title": "Datos Usuario"
+      },
+      "puesto": "Puesto",
+      "fechaAct": "Fecha Act",
+      "sucursal": "Sucursal",
+      "user": "User"
+    }
+  }
+}

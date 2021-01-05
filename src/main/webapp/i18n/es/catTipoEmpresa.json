@@ -1,0 +1,23 @@
+{
+  "resaMxWebApp": {
+    "catTipoEmpresa": {
+      "home": {
+        "title": "Cat Tipo Empresas",
+        "createLabel": "Crear nuevo Cat Tipo Empresa",
+        "createOrEditLabel": "Crear o editar Cat Tipo Empresa",
+        "notFound": "Ningún Cat Tipo Empresas encontrado"
+      },
+      "created": "Un nuevo Cat Tipo Empresa ha sido creado con el identificador {{ param }}",
+      "updated": "Un Cat Tipo Empresa ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Cat Tipo Empresa ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Cat Tipo Empresa {{ id }}?"
+      },
+      "detail": {
+        "title": "Cat Tipo Empresa"
+      },
+      "tipo": "Tipo",
+      "usuario": "Usuario"
+    }
+  }
+}

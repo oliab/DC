@@ -1,0 +1,25 @@
+{
+  "resaMxWebApp": {
+    "catSector": {
+      "home": {
+        "title": "Catálogo de Actividades Económicas",
+        "createLabel": "Agregar Actividad",
+        "createOrEditLabel": "Crear o editar Actividad Económica",
+        "notFound": "No se han encontrado Actividades Económicas"
+      },
+      "created": "Se ha agregado la Actividad Económica con el identificador {{ param }}",
+      "updated": "Se ha actualizado la Actividad Económica con el identificador {{ param }}",
+      "deleted": "Se ha eliminado la Actividad Económica con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar la Actividad Económica {{ id }}?"
+      },
+      "detail": {
+        "title": "Actividad Económica"
+      },
+      "id": "Clave",
+      "actividadEconomica": "Actividad Economica",
+      "actividadVulnerable": "Actividad Vulnerable",
+      "usuario": "Usuario"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="resaMxWebApp.empresa.home.title">Empresas</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-empresa" [routerLink]="['/empresa/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="resaMxWebApp.empresa.home.createLabel">
+            Create a new Empresa
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="empresas?.length === 0">
+        <span jhiTranslate="resaMxWebApp.empresa.home.notFound">No empresas found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="empresas && empresas.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fideicomiso"><span jhiTranslate="resaMxWebApp.empresa.fideicomiso">Fideicomiso</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="rfc"><span jhiTranslate="resaMxWebApp.empresa.rfc">Rfc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="razonSocial"><span jhiTranslate="resaMxWebApp.empresa.razonSocial">Razon Social</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="noIdentificacion"><span jhiTranslate="resaMxWebApp.empresa.noIdentificacion">No Identificacion</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="telefono"><span jhiTranslate="resaMxWebApp.empresa.telefono">Telefono</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fechaAlta"><span jhiTranslate="resaMxWebApp.empresa.fechaAlta">Fecha Alta</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fechaAct"><span jhiTranslate="resaMxWebApp.empresa.fechaAct">Fecha Act</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="tipoIdentificacion.id"><span jhiTranslate="resaMxWebApp.empresa.tipoIdentificacion">Tipo Identificacion</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="usuarioAlta.id"><span jhiTranslate="resaMxWebApp.empresa.usuarioAlta">Usuario Alta</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="usuarioAct.id"><span jhiTranslate="resaMxWebApp.empresa.usuarioAct">Usuario Act</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="domicilio.id"><span jhiTranslate="resaMxWebApp.empresa.domicilio">Domicilio</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let empresa of empresas ;trackBy: trackId">
+                    <td><a [routerLink]="['/empresa', empresa.id, 'view']">{{ empresa.id }}</a></td>
+                    <td>{{ empresa.fideicomiso }}</td>
+                    <td>{{ empresa.rfc }}</td>
+                    <td>{{ empresa.razonSocial }}</td>
+                    <td>{{ empresa.noIdentificacion }}</td>
+                    <td>{{ empresa.telefono }}</td>
+                    <td>{{ empresa.fechaAlta | date:'mediumDate' }}</td>
+                    <td>{{ empresa.fechaAct | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="empresa.tipoIdentificacion">
+                            <a [routerLink]="['/cat-identificacion', empresa.tipoIdentificacion?.id, 'view']" >{{ empresa.tipoIdentificacion?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ empresa.usuarioAlta?.id }}
+                    </td>
+                    <td>
+                        {{ empresa.usuarioAct?.id }}
+                    </td>
+                    <td>
+                        <div *ngIf="empresa.domicilio">
+                            <a [routerLink]="['/domicilio-usuario', empresa.domicilio?.id, 'view']" >{{ empresa.domicilio?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/empresa', empresa.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/empresa', empresa.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(empresa)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="empresas && empresas.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

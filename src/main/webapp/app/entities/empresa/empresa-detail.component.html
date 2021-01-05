@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="empresa">
+            <h2><span jhiTranslate="resaMxWebApp.empresa.detail.title">Empresa</span> {{ empresa.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resaMxWebApp.empresa.fideicomiso">Fideicomiso</span></dt>
+                <dd>
+                    <span>{{ empresa.fideicomiso }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.empresa.rfc">Rfc</span></dt>
+                <dd>
+                    <span>{{ empresa.rfc }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.empresa.razonSocial">Razon Social</span></dt>
+                <dd>
+                    <span>{{ empresa.razonSocial }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.empresa.noIdentificacion">No Identificacion</span></dt>
+                <dd>
+                    <span>{{ empresa.noIdentificacion }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.empresa.telefono">Telefono</span></dt>
+                <dd>
+                    <span>{{ empresa.telefono }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.empresa.fechaAlta">Fecha Alta</span></dt>
+                <dd>
+                    <span>{{ empresa.fechaAlta }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.empresa.fechaAct">Fecha Act</span></dt>
+                <dd>
+                    <span>{{ empresa.fechaAct }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.empresa.tipoIdentificacion">Tipo Identificacion</span></dt>
+                <dd>
+                    <div *ngIf="empresa.tipoIdentificacion">
+                        <a [routerLink]="['/cat-identificacion', empresa.tipoIdentificacion?.id, 'view']">{{ empresa.tipoIdentificacion?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.empresa.usuarioAlta">Usuario Alta</span></dt>
+                <dd>
+                    {{ empresa.usuarioAlta?.id }}
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.empresa.usuarioAct">Usuario Act</span></dt>
+                <dd>
+                    {{ empresa.usuarioAct?.id }}
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.empresa.domicilio">Domicilio</span></dt>
+                <dd>
+                    <div *ngIf="empresa.domicilio">
+                        <a [routerLink]="['/domicilio-usuario', empresa.domicilio?.id, 'view']">{{ empresa.domicilio?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/empresa', empresa.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row pt-5 mb-2">
+        <div class="col-12">
+        <div *ngIf="catSucursal">
+            <h3 class="mb-4 pb-2"><span jhiTranslate="resaMxWebApp.catSucursal.detail.title">Cat Sucursal</span> {{ catSucursal.id }}</h3>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <dl class="row jh-entity-details">
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="resaMxWebApp.catSucursal.nombre">Nombre</span></dt>
+                                    <dd>
+                                        <span>{{ catSucursal.nombre }}</span>
+                                    </dd>
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="resaMxWebApp.catSucursal.direccion">Direccion</span></dt>
+                                    <dd>
+                                        <span>{{ catSucursal.direccion }}</span>
+                                    </dd>
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="resaMxWebApp.catSucursal.telefono">Telefono</span></dt>
+                                    <dd>
+                                        <span>{{ catSucursal.telefono }}</span>
+                                    </dd>
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="resaMxWebApp.catSucursal.fechaAct">Fecha Act</span></dt>
+                                    <dd>
+                                        <span>{{ catSucursal.fechaAct }}</span>
+                                    </dd>
+                                </div>
+                                <div class="col-md-4">
+                                    <dt><span jhiTranslate="resaMxWebApp.catSucursal.usuario">Usuario</span></dt>
+                                    <dd>
+                                        {{ catSucursal.usuario?.firstName + ' ' +  catSucursal.usuario?.lastName }}
+                                    </dd>
+                                </div>
+                            </dl>
+                            <jhi-alert-error></jhi-alert-error>
+                            <div class="row">
+                                <div class="col-12 text-right">
+                                    <button type="submit"
+                                            (click)="previousState()"
+                                            class="btn btn-outline-primary px-4">
+                                            <i class="mdi mdi-arrow-left mr-2"></i><span jhiTranslate="entity.action.back">Back</span>
+                                    </button>
+                
+                                    <button type="button"
+                                            [routerLink]="['/cat-sucursal', catSucursal.id, 'edit']"
+                                            class="btn btn-primary px-4">
+                                            <i class="mdi mdi-pencil mr-2"></i><span jhiTranslate="entity.action.edit">Edit</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{
+  "resaMxWebApp": {
+    "catPais": {
+      "home": {
+        "title": "Catálogo de Países",
+        "createLabel": "Agregar País",
+        "createOrEditLabel": "Crear o editar país",
+        "notFound": "Ningún país encontrado"
+      },
+      "created": "Se ha agregado el País con el identificador {{ param }}",
+      "updated": "Se ha actualziado el País con el identificador {{ param }}",
+      "deleted": "Se ha eliminado el País con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar el País {{ id }}?"
+      },
+      "detail": {
+        "title": "País"
+      },
+      "id": "Código numérico",
+      "nombre": "Nombre",
+      "codigoA2": "Código A2",
+      "codigoA3": "Código A3",
+      "codigo": "Código de país",
+      "usuario": "Usuario"
+    }
+  }
+}

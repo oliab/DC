@@ -1,0 +1,35 @@
+{
+  "resaMxWebApp": {
+    "domicilioEmpresa": {
+      "home": {
+        "title": "Domicilio Empresas",
+        "createLabel": "Crear nuevo Domicilio Empresa",
+        "createOrEditLabel": "Crear o editar Domicilio Empresa",
+        "notFound": "Ningún Domicilio Empresas encontrado"
+      },
+      "created": "Un nuevo Domicilio Empresa ha sido creado con el identificador {{ param }}",
+      "updated": "Un Domicilio Empresa ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Domicilio Empresa ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Domicilio Empresa {{ id }}?"
+      },
+      "detail": {
+        "title": "Domicilio Empresa"
+      },
+      "colonia": "Colonia",
+      "calle": "Calle",
+      "noExt": "No Ext",
+      "noInt": "No Int",
+      "domicilio": "Domicilio",
+      "fechaAct": "Fecha Act",
+      "nacionalidad": "Nacionalidad",
+      "paisOrigen": "Pais Origen",
+      "pais": "Pais",
+      "estado": "Estado",
+      "municipio": "Municipio",
+      "localidad": "Localidad",
+      "cp": "Cp",
+      "user": "User"
+    }
+  }
+}

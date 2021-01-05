@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row pt-5 mb-4">
+        <div class="col-12">
+            <h3 id="audits-page-heading" jhiTranslate="audits.title">Audits</h3>
+        </div>
+    </div> 
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <jhi-alert-error></jhi-alert-error>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 jhiTranslate="audits.filter.title">Filter by date</h5>                
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" jhiTranslate="audits.filter.from">from</span>
+                                </div>
+                                <input type="date" class="form-control" name="start" [(ngModel)]="fromDate" (ngModelChange)="transition()" required/>
+                
+                                <div class="input-group-append">
+                                    <span class="input-group-text" jhiTranslate="audits.filter.to">To</span>
+                                </div>
+                                <input type="date" class="form-control" name="end" [(ngModel)]="toDate" (ngModelChange)="transition()" required/>
+                            </div>
+                        </div>
+                    </div>                
+                    <div class="alert alert-warning" *ngIf="audits?.length === 0">
+                        <span jhiTranslate="audits.notFound">No audit found</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive mb-5" *ngIf="audits && audits.length > 0">
+                                <table class="table" aria-describedby="audits-page-heading">
+                                    <thead [ngSwitch]="canLoad()">
+                                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)" *ngSwitchCase="true">
+                                            <th scope="col" jhiSortBy="auditEventDate"><span jhiTranslate="audits.table.header.date">Date</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col" jhiSortBy="principal"><span jhiTranslate="audits.table.header.principal">User</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col" jhiSortBy="auditEventType"><span jhiTranslate="audits.table.header.status">State</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"><span jhiTranslate="audits.table.header.data">Extra data</span></th>
+                                        </tr>
+                                        <tr *ngSwitchCase="false">
+                                            <th scope="col"><span jhiTranslate="audits.table.header.date">Date</span></th>
+                                            <th scope="col"><span jhiTranslate="audits.table.header.principal">User</span></th>
+                                            <th scope="col"><span jhiTranslate="audits.table.header.status">State</span></th>
+                                            <th scope="col"><span jhiTranslate="audits.table.header.data">Extra data</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let audit of audits">
+                                            <td><span>{{ audit.timestamp | date:'medium' }}</span></td>
+                                            <td><small>{{ audit.principal }}</small></td>
+                                            <td>{{ audit.type }}</td>
+                                            <td>
+                                                <span *ngIf="audit.data?.message">{{ audit.data.message }}</span>
+                                                <span *ngIf="audit.data?.remoteAddress"><span jhiTranslate="audits.table.data.remoteAddress">Remote Address</span> {{ audit.data.remoteAddress }}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                            <div *ngIf="audits && audits.length > 0" class="pt-5">
+                                <div class="row justify-content-center mb-3">
+                                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                                </div>
+                        
+                                <div class="row justify-content-center">
+                                    <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="transition()" [disabled]="!canLoad()"></ngb-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

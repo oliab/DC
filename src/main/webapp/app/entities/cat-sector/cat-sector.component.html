@@ -1,0 +1,112 @@
+<div class="container-fluid">
+    <div class="row pt-5 mb-4">
+        <div class="col-6">
+            <h3 id="page-heading">
+                <span jhiTranslate="resaMxWebApp.catSector.home.title">Cat Sectors</span>                
+            </h3>
+        </div>
+        <div class="col-6 text-right">
+            <button id="jh-create-entity" class="btn btn-primary px-4 shadow-sm jh-create-entity create-cat-sector" [routerLink]="['/cat-sector/new']">
+                <i class="mdi mdi-plus mr-2"></i>
+                <span  jhiTranslate="resaMxWebApp.catSector.home.createLabel">
+                Create a new Cat Sector
+                </span>
+            </button>
+        </div>
+    </div>
+    <jhi-alert-error></jhi-alert-error>
+    
+    <div class="row mb-2">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <input type="text" class="form-control form-control-sm" [(ngModel)]="filterId" placeholder="Buscar {{'resaMxWebApp.catSector.id'|translate}}"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-sm" [(ngModel)]="filterActividad" placeholder="Buscar {{'resaMxWebApp.catSector.actividadEconomica'|translate}}"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select class="form-control form-control-sm" [(ngModel)]="filterVulnereable">
+                                    <option [ngValue]="null">Seleccione vulnerabilidad</option>
+                                    <option [ngValue]="false">No</option>
+                                    <option [ngValue]="true">S&iacute;</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-primary btn-sm" (click)="onLimpiar()">Limpiar</button>
+                            <button class="btn btn-primary btn-sm" (click)="onBuscar()">Buscar</button>
+                        </div>
+                    </div>
+                    <jhi-alert></jhi-alert>
+                    <div class="row">
+                        <div class="alert alert-warning" id="no-result" *ngIf="catSectors?.length === 0">
+                            <span jhiTranslate="resaMxWebApp.catSector.home.notFound">No catSectors found</span>
+                        </div>
+                        <div class="col-12">
+                            <div class="table-responsive mb-5" id="entities" *ngIf="catSectors && catSectors.length > 0">
+                                <table class="table" aria-describedby="page-heading">
+                                    <thead>
+                                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                                            <th scope="col"  jhiSortBy="id"><span jhiTranslate="resaMxWebApp.catSector.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="actividadEconomica"><span jhiTranslate="resaMxWebApp.catSector.actividadEconomica">Actividad Economica</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="actividadVulnerable"><span jhiTranslate="resaMxWebApp.catSector.actividadVulnerable">Actividad Vulnerable</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"  jhiSortBy="usuario.id"><span jhiTranslate="resaMxWebApp.catSector.usuario">Usuario</span> <fa-icon icon="sort"></fa-icon></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let catSector of catSectors ;trackBy: trackId">
+                                            <td><a [routerLink]="['/cat-sector', catSector.id, 'view']">{{ catSector.id }}</a></td>
+                                            <td>{{ catSector.actividadEconomica }}</td>
+                                            <td>{{ catSector.actividadVulnerable ? 'S&iacute;' : 'No' }}</td>
+                                            <td>
+                                                {{ catSector.usuario?.firstName + ' ' +  catSector.usuario?.lastName }}
+                                            </td>
+                                            <td class="text-right text-nowrap">
+                                                    <button type="submit"
+                                                            [routerLink]="['/cat-sector', catSector.id, 'view']"
+                                                            class="btn btn-outline-primary btn-sm px-2">
+                                                            <i class="mdi mdi-eye"></i>
+                                                        <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.view">View</span>
+                                                    </button>
+                        
+                                                    <button type="submit"
+                                                            [routerLink]="['/cat-sector', catSector.id, 'edit']"
+                                                            class="btn btn-outline-primary btn-sm px-2">
+                                                            <i class="mdi mdi-pencil"></i>
+                                                        <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.edit">Edit</span>
+                                                    </button>
+                        
+                                                    <button type="submit" (click)="delete(catSector)"
+                                                    class="btn btn-outline-primary btn-sm px-2">
+                                                    <i class="mdi mdi-trash-can"></i>
+                                                        <span class="d-none d-md-inline ml-2" jhiTranslate="entity.action.delete">Delete</span>
+                                                    </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                            <div *ngIf="catSectors && catSectors.length > 0" class="pt-5">
+                                <div class="row justify-content-center mb-3">
+                                    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                                </div>
+                        
+                                <div class="row justify-content-center">
+                                    <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>

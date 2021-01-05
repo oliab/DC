@@ -1,0 +1,45 @@
+{
+  "resaMxWebApp": {
+    "cliente": {
+      "home": {
+        "title": "Clientes",
+        "createLabel": "Agregar Cliente",
+        "createOrEditLabel": "Crear o editar Cliente",
+        "notFound": "No se han encontrado Clientes"
+      },
+      "created": "Se ha agregado el Cliente con el identificador {{ param }}",
+      "updated": "Se ha actualizado el Cliente con el identificador {{ param }}",
+      "deleted": "Se ha eliminado el Cliente con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Cliente {{ id }}?"
+      },
+      "detail": {
+        "title": "Cliente"
+      },
+      "cliente": "Cliente",
+      "noIdentificacion": "No Identificación",
+      "ingresos": "Ingresos",
+      "estimacionOperacion": "Estimación Operación",
+      "telefono": "Teléfono",
+      "fechaAlta": "Fecha Alta",
+      "fechaAct": "Fecha Actualización",
+      "usuario": "Usuario",
+      "empresa": "Empresa",
+      "tipoCliente": "Tipo de Cliente",
+      "tipoIdentificacion": "Tipo de Identificación",
+      "sector": "Actividad económica",
+      "moneda": "Moneda",
+      "usuarioAlta": "Usuario de Alta",
+      "usuarioAct": "Usuario de Actualización",
+      "expediente": "Expediente",
+      "datosGenerales": "Datos Generales",
+      "datosDireccion": "Dirección",
+      "datosEmpresa": "Datos Empresa",
+      "datosDireccionEmpresa": "Dirección Empresa",
+      "comprobanteIdentificacion": "Comprobante de identificación",
+      "comprobanteIngresos": "Comprobante de ingresos",
+      "comprobanteDomicilio": "Comprobante de domicilio",
+      "comprobanteFirmaElectronica": "Firma electrónica"
+    }
+  }
+}

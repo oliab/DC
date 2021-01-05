@@ -1,0 +1,127 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="resaMxWebApp.domicilioUsuario.home.title">Domicilio Usuarios</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-domicilio-usuario" [routerLink]="['/domicilio-usuario/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="resaMxWebApp.domicilioUsuario.home.createLabel">
+            Create a new Domicilio Usuario
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="domicilioUsuarios?.length === 0">
+        <span jhiTranslate="resaMxWebApp.domicilioUsuario.home.notFound">No domicilioUsuarios found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="domicilioUsuarios && domicilioUsuarios.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="colonia"><span jhiTranslate="resaMxWebApp.domicilioUsuario.colonia">Colonia</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="calle"><span jhiTranslate="resaMxWebApp.domicilioUsuario.calle">Calle</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="noExt"><span jhiTranslate="resaMxWebApp.domicilioUsuario.noExt">No Ext</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="noInt"><span jhiTranslate="resaMxWebApp.domicilioUsuario.noInt">No Int</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="domicilio"><span jhiTranslate="resaMxWebApp.domicilioUsuario.domicilio">Domicilio</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fechaAct"><span jhiTranslate="resaMxWebApp.domicilioUsuario.fechaAct">Fecha Act</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nacionalidad.id"><span jhiTranslate="resaMxWebApp.domicilioUsuario.nacionalidad">Nacionalidad</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="paisOrigen.id"><span jhiTranslate="resaMxWebApp.domicilioUsuario.paisOrigen">Pais Origen</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="pais.id"><span jhiTranslate="resaMxWebApp.domicilioUsuario.pais">Pais</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="estado.id"><span jhiTranslate="resaMxWebApp.domicilioUsuario.estado">Estado</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="municipio.id"><span jhiTranslate="resaMxWebApp.domicilioUsuario.municipio">Municipio</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="localidad.id"><span jhiTranslate="resaMxWebApp.domicilioUsuario.localidad">Localidad</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="cp.id"><span jhiTranslate="resaMxWebApp.domicilioUsuario.cp">Cp</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="user.id"><span jhiTranslate="resaMxWebApp.domicilioUsuario.user">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let domicilioUsuario of domicilioUsuarios ;trackBy: trackId">
+                    <td><a [routerLink]="['/domicilio-usuario', domicilioUsuario.id, 'view']">{{ domicilioUsuario.id }}</a></td>
+                    <td>{{ domicilioUsuario.colonia }}</td>
+                    <td>{{ domicilioUsuario.calle }}</td>
+                    <td>{{ domicilioUsuario.noExt }}</td>
+                    <td>{{ domicilioUsuario.noInt }}</td>
+                    <td>{{ domicilioUsuario.domicilio }}</td>
+                    <td>{{ domicilioUsuario.fechaAct | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="domicilioUsuario.nacionalidad">
+                            <a [routerLink]="['/cat-nacionalidad', domicilioUsuario.nacionalidad?.id, 'view']" >{{ domicilioUsuario.nacionalidad?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="domicilioUsuario.paisOrigen">
+                            <a [routerLink]="['/cat-pais', domicilioUsuario.paisOrigen?.id, 'view']" >{{ domicilioUsuario.paisOrigen?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="domicilioUsuario.pais">
+                            <a [routerLink]="['/cat-pais', domicilioUsuario.pais?.id, 'view']" >{{ domicilioUsuario.pais?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="domicilioUsuario.estado">
+                            <a [routerLink]="['/cat-estado', domicilioUsuario.estado?.id, 'view']" >{{ domicilioUsuario.estado?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="domicilioUsuario.municipio">
+                            <a [routerLink]="['/cat-municipio', domicilioUsuario.municipio?.id, 'view']" >{{ domicilioUsuario.municipio?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="domicilioUsuario.localidad">
+                            <a [routerLink]="['/cat-localidad', domicilioUsuario.localidad?.id, 'view']" >{{ domicilioUsuario.localidad?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="domicilioUsuario.cp">
+                            <a [routerLink]="['/cat-cp', domicilioUsuario.cp?.id, 'view']" >{{ domicilioUsuario.cp?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{ domicilioUsuario.user?.id }}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/domicilio-usuario', domicilioUsuario.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/domicilio-usuario', domicilioUsuario.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(domicilioUsuario)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="domicilioUsuarios && domicilioUsuarios.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

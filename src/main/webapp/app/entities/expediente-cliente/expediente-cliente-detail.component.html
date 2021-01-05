@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="expedienteCliente">
+            <h2><span jhiTranslate="resaMxWebApp.expedienteCliente.detail.title">Expediente Cliente</span> {{ expedienteCliente.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.empresarial">Empresarial</span></dt>
+                <dd>
+                    <span>{{ expedienteCliente.empresarial }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.descripcion">Descripcion</span></dt>
+                <dd>
+                    <span>{{ expedienteCliente.descripcion }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.documento">Documento</span></dt>
+                <dd>
+                    <div *ngIf="expedienteCliente.documento">
+                        <a (click)="openFile(expedienteCliente.documentoContentType, expedienteCliente.documento)" jhiTranslate="entity.action.open">open</a>
+                        {{ expedienteCliente.documentoContentType }}, {{ byteSize(expedienteCliente.documento) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.fechaAlta">Fecha Alta</span></dt>
+                <dd>
+                    <span>{{ expedienteCliente.fechaAlta }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.fechaAct">Fecha Act</span></dt>
+                <dd>
+                    <span>{{ expedienteCliente.fechaAct }}</span>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.cliente">Cliente</span></dt>
+                <dd>
+                    <div *ngIf="expedienteCliente.cliente">
+                        <a [routerLink]="['/cliente', expedienteCliente.cliente?.id, 'view']">{{ expedienteCliente.cliente?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.tipoDocumento">Tipo Documento</span></dt>
+                <dd>
+                    <div *ngIf="expedienteCliente.tipoDocumento">
+                        <a [routerLink]="['/cat-tipo-documento', expedienteCliente.tipoDocumento?.id, 'view']">{{ expedienteCliente.tipoDocumento?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.usuarioAlta">Usuario Alta</span></dt>
+                <dd>
+                    {{ expedienteCliente.usuarioAlta?.id }}
+                </dd>
+                <dt><span jhiTranslate="resaMxWebApp.expedienteCliente.usuarioAct">Usuario Act</span></dt>
+                <dd>
+                    {{ expedienteCliente.usuarioAct?.id }}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/expediente-cliente', expedienteCliente.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

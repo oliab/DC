@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row pt-5 mb-4" *ngIf="loggers">
+        <div class="col-12">
+            <h3 id="logs-page-heading" jhiTranslate="logs.title">Logs</h3>
+        </div>
+    </div>
+    
+    <div class="row"  *ngIf="loggers">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <p jhiTranslate="logs.nbloggers" [translateValues]="{ total: loggers.length }">There are {{ loggers.length }} loggers.</p>                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label jhiTranslate="logs.filter">Filter</label> 
+                                <input type="text" [(ngModel)]="filter" class="form-control">
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table mb-5" aria-describedby="logs-page-heading">
+                                    <thead>
+                                        <tr title="click to order">
+                                            <th scope="col" (click)="orderProp = 'name'; reverse=!reverse"><span jhiTranslate="logs.table.name">Name</span></th>
+                                            <th scope="col" (click)="orderProp = 'level'; reverse=!reverse"><span jhiTranslate="logs.table.level">Level</span></th>
+                                        </tr>
+                                    </thead>
+                        
+                                    <tr *ngFor="let logger of (loggers | pureFilter:filter:'name' | orderBy:orderProp:reverse)">
+                                        <td><small>{{ logger.name | slice:0:140 }}</small></td>
+                                        <td class="text-nowrap">
+                                            <button (click)="changeLevel(logger.name, 'TRACE')" [ngClass]="(logger.level=='TRACE') ? 'btn-primary' : 'btn-light'" class="btn btn-sm">TRACE</button>
+                                            <button (click)="changeLevel(logger.name, 'DEBUG')" [ngClass]="(logger.level=='DEBUG') ? 'btn-success' : 'btn-light'" class="btn btn-sm">DEBUG</button>
+                                            <button (click)="changeLevel(logger.name, 'INFO')" [ngClass]="(logger.level=='INFO') ? 'btn-info' : 'btn-light'" class="btn btn-sm">INFO</button>
+                                            <button (click)="changeLevel(logger.name, 'WARN')" [ngClass]="(logger.level=='WARN') ? 'btn-warning' : 'btn-light'" class="btn btn-sm">WARN</button>
+                                            <button (click)="changeLevel(logger.name, 'ERROR')" [ngClass]="(logger.level=='ERROR') ? 'btn-danger' : 'btn-light'" class="btn btn-sm">ERROR</button>
+                                            <button (click)="changeLevel(logger.name, 'OFF')" [ngClass]="(logger.level=='OFF') ? 'btn-secondary' : 'btn-light'" class="btn btn-sm">OFF</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

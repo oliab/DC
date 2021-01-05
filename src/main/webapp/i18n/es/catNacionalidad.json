@@ -1,0 +1,23 @@
+{
+  "resaMxWebApp": {
+    "catNacionalidad": {
+      "home": {
+        "title": "Cat Nacionalidads",
+        "createLabel": "Crear nuevo Cat Nacionalidad",
+        "createOrEditLabel": "Crear o editar Cat Nacionalidad",
+        "notFound": "Ningún Cat Nacionalidads encontrado"
+      },
+      "created": "Un nuevo Cat Nacionalidad ha sido creado con el identificador {{ param }}",
+      "updated": "Un Cat Nacionalidad ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Cat Nacionalidad ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Cat Nacionalidad {{ id }}?"
+      },
+      "detail": {
+        "title": "Cat Nacionalidad"
+      },
+      "nacionalidad": "Nacionalidad",
+      "usuario": "Usuario"
+    }
+  }
+}

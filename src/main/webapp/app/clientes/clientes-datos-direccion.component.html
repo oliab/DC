@@ -1,0 +1,193 @@
+<form name="editForm" role="form" novalidate  [formGroup]="editForm">
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.nacionalidad" for="field_nacionalidad">Nacionalidad</label>
+                <ngx-select id="field_nacionalidad" 
+                        name="nacionalidad" formControlName="nacionalidad"
+                        class="form-control"
+                        [items]="catnacionalidads" [allowClear]="true" placeholder="Seleccione una nacionalidad" 
+                        optionValueField="id" optionTextField="nacionalidad"
+                        (select)="onNacionalidad()" [(ngModel)]="datosDireccionCliente.domicilioUsuario.nacionalidadId"
+                        noResultsFound="{{'error.noResults' | translate }}">
+                </ngx-select>
+            </jhi-form-validator>
+        </div>
+        <div class="col-md-4">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.paisOrigen" for="field_paisOrigen">Pais Origen</label>
+                <ngx-select id="field_paisOrigen" [disabled]="datosDireccionCliente.domicilioUsuario.nacionalidadId === NacionalidadEnum.MEXICANO"
+                            name="paisOrigen" formControlName="paisOrigen"
+                            class="form-control"
+                            [items]="catpaisExt" [allowClear]="true" placeholder="Seleccione un país" 
+                            optionValueField="id" optionTextField="nombre" [(ngModel)]="datosDireccionCliente.domicilioUsuario.paisOrigenId"
+                            noResultsFound="{{'error.noResults' | translate }}">
+                </ngx-select>
+            </jhi-form-validator>
+        </div>
+        <div class="col-md-4">
+            <div *ngIf="datosDireccionCliente.domicilioUsuario.nacionalidadId">
+                <jhi-form-validator>
+                    <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.pais" for="field_pais">Pais</label>
+                    <ngx-select id="field_pais" 
+                                name="pais" formControlName="pais"
+                                class="form-control"
+                                [items]="catpaisExt" [allowClear]="true" placeholder="Seleccione un país" 
+                                optionValueField="id" optionTextField="nombre"
+                                (select)="onPais()"  [(ngModel)]="datosDireccionCliente.domicilioUsuario.paisId"
+                                noResultsFound="{{'error.noResults' | translate }}">
+                    </ngx-select>
+                </jhi-form-validator>						
+            </div>
+        </div>
+        
+        <div class="col-12">
+            <div class="row" *ngIf="datosDireccionCliente.domicilioUsuario.nacionalidadId && datosDireccionCliente.domicilioUsuario.paisId === PaisEnum.MEXICO">
+                <div class="col-12">
+                    <label>Direcci&oacute;n del usuario:</label>
+                </div>
+                <div class="col-md-4">
+                    <jhi-form-validator>
+                        <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.estado" for="field_estado">Estado</label>
+                        <ngx-select id="field_estado" 
+                                name="estado" formControlName="estado"
+                                class="form-control"
+                                [items]="catestados" [allowClear]="true" placeholder="Seleccione un estado" 
+                                optionValueField="id" optionTextField="nombre"
+                                (select)="onEstado()"  [(ngModel)]="datosDireccionCliente.domicilioUsuario.estadoId"
+                                noResultsFound="{{'error.noResults' | translate }}">
+                        </ngx-select>
+                    </jhi-form-validator>
+                </div>
+                <div class="col-md-4">
+                    <jhi-form-validator>
+                        <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.municipio" for="field_municipio">Municipio</label>								
+                        <ngx-select id="field_municipio" 
+                                name="municipio" formControlName="municipio"
+                                class="form-control"
+                                [items]="catmunicipios" [allowClear]="true" placeholder="Seleccione un municipio" 
+                                optionValueField="id" optionTextField="nombre"
+                                (select)="onMunicipio()" [(ngModel)]="datosDireccionCliente.domicilioUsuario.municipioId"
+                                noResultsFound="{{'error.noResults' | translate }}">
+                        </ngx-select>
+                    </jhi-form-validator>
+                </div>
+                <div class="col-md-4">
+                    <jhi-form-validator>
+                        <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.localidad" for="field_localidad">Localidad</label>
+                        <ngx-select id="field_localidad" 
+                                name="localidad" formControlName="localidad"
+                                class="form-control"
+                                [items]="catlocalidads" [allowClear]="true" placeholder="Seleccione una localidad" 
+                                optionValueField="id" optionTextField="nombre" [(ngModel)]="datosDireccionCliente.domicilioUsuario.localidadId"
+                                noResultsFound="{{'error.noResults' | translate }}">
+                        </ngx-select>
+                    </jhi-form-validator>
+                </div>
+                <div class="col-md-4">
+                    <jhi-form-validator>
+                        <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.cp" for="field_cp">Cp</label>
+                        <ngx-select id="field_cp" 
+                                name="cp" formControlName="cp"
+                                class="form-control"
+                                [items]="catcps" [allowClear]="true" placeholder="Seleccione un CP" 
+                                optionValueField="id" optionTextField="id" 
+                                [(ngModel)]="datosDireccionCliente.domicilioUsuario.cpId"
+                                noResultsFound="{{'error.noResults' | translate }}">
+                        </ngx-select>
+                    </jhi-form-validator>
+                </div>
+                <div class="col-md-4">
+                    <jhi-form-validator>
+                        <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.colonia" for="field_colonia">Colonia</label>
+                        <input type="text" class="form-control" name="colonia" id="field_colonia" 
+                            [(ngModel)]="datosDireccionCliente.domicilioUsuario.colonia" 
+                            placeholder="{{ 'resaMxWebApp.domicilioUsuario.colonia' | translate }}"
+                            formControlName="colonia"/>
+                    </jhi-form-validator>
+                </div>
+                <div class="col-md-4">
+                    <jhi-form-validator>
+                        <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.calle" for="field_calle">Calle</label>
+                        <input type="text" class="form-control" name="calle" id="field_calle" 
+                                [(ngModel)]="datosDireccionCliente.domicilioUsuario.calle" 
+                                placeholder="{{ 'resaMxWebApp.domicilioUsuario.calle' | translate }}"
+                                formControlName="calle"/>
+                    </jhi-form-validator>
+                </div>
+                <div class="col-md-4">
+                    <jhi-form-validator>
+                        <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.noExt" for="field_noExt">No Ext</label>
+                        <input type="text" class="form-control" name="noExt" id="field_noExt" 
+                                [(ngModel)]="datosDireccionCliente.domicilioUsuario.noExt"
+                                placeholder="{{ 'resaMxWebApp.domicilioUsuario.noExt' | translate }}"
+                                formControlName="noExt"/>
+                    </jhi-form-validator>
+                </div>
+                <div class="col-md-4">
+                    <jhi-form-validator>
+                        <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.noInt" for="field_noInt">No Int</label>
+                        <input type="text" class="form-control" name="noInt" id="field_noInt" 
+                                [(ngModel)]="datosDireccionCliente.domicilioUsuario.noInt"
+                                placeholder="{{ 'resaMxWebApp.domicilioUsuario.noInt' | translate }}"
+                                formControlName="noInt"/>
+                    </jhi-form-validator>  
+                </div>										
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div *ngIf="datosDireccionCliente.domicilioUsuario.nacionalidadId 
+                                && datosDireccionCliente.domicilioUsuario.paisId 
+                                && datosDireccionCliente.domicilioUsuario.paisId !== PaisEnum.MEXICO">							
+                        <jhi-form-validator>
+                            <label class="form-control-label" jhiTranslate="resaMxWebApp.domicilioUsuario.domicilio" for="field_domicilio">Domicilio</label>
+                            <input type="text" class="form-control" name="domicilio" id="field_domicilio" 
+                                    [(ngModel)]="datosDireccionCliente.domicilioUsuario.domicilio"
+                                    placeholder="{{ 'resaMxWebApp.domicilioUsuario.domicilio' | translate }}"
+                                    formControlName="domicilio"/>
+                        </jhi-form-validator>
+                    </div>   
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <h5>Documentos</h5>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.cliente.comprobanteDomicilio" for="field_comprobanteDomicilio">Documento</label>
+                <div>                    
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" [ngClass]="tipoCliente" id="file_comprobanteDomicilio" (change)="setFileData($event, 'comprobanteDomicilio', false)" jhiTranslate="entity.action.addblob">
+                        <label class="custom-file-label" for="file_comprobanteDomicilio">Seleccionar Archivo</label>
+                    </div>
+                    <div *ngIf="editForm.get('comprobanteDomicilio')!.value" class="form-text text-danger clearfix float-left">
+                        <a class="pull-left c-blue mr-3" (click)="openFile(editForm.get('comprobanteDomicilioContentType')!.value, editForm.get('comprobanteDomicilio')!.value)" jhiTranslate="entity.action.open">open</a>
+                        <span class="pull-left mb-2 d-inline-block">{{ editForm.get('comprobanteDomicilioContentType')!.value }}, {{ byteSize(editForm.get('comprobanteDomicilio')!.value) }}</span>
+                        <button type="button" (click)="editForm.patchValue({comprobanteDomicilio: null});editForm.patchValue({comprobanteDomicilioContentType: null});"
+                                class="btn btn-outline-primary btn-sm pull-right">
+                                <i class="mdi mdi-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" class="form-control" name="comprobanteDomicilio" id="field_comprobanteDomicilio" 
+                       formControlName="comprobanteDomicilio"/>
+                <input type="hidden" class="form-control" name="comprobanteDomicilioContentType" id="field_comprobanteDomicilioContentType"
+                       formControlName="comprobanteDomicilioContentType" />
+            </jhi-form-validator>
+        </div>
+        <div class="col-md-8">
+            <jhi-form-validator>
+                <label class="form-control-label" jhiTranslate="resaMxWebApp.expedienteCliente.descripcion" for="field_descripcionIngresos">Descripcion</label>
+                <textarea class="form-control" name="descripcionDomicilio" id="field_descripcionDomicilio"
+                       [(ngModel)]="datosDireccionCliente.descripcionDomicilio" rows="3"
+                       formControlName="descripcionDomicilio"></textarea>
+            </jhi-form-validator>
+        </div>        
+    </div>
+</form>
